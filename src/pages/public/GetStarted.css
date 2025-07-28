@@ -1,0 +1,292 @@
+/* GetStarted.css */
+.gs-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  color: #ffffff; /* Ensures white text by default */
+}
+
+/* Hero Section */
+.gs-hero {
+  display: flex;
+  align-items: center;
+  min-height: 80vh;
+  gap: 4rem;
+  padding: 4rem 0;
+  position: relative;
+}
+
+.gs-hero-content {
+  flex: 1;
+  z-index: 2;
+}
+
+.gs-hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.gs-hero h1 span {
+  color: #E4C421;
+}
+
+.gs-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.gs-cta-group {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.gs-primary-cta {
+  background: linear-gradient(135deg, #E4C421, #F8D347);
+  color: #0F0F0F;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.gs-primary-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(228, 196, 33, 0.3);
+}
+
+.gs-secondary-cta {
+  color: #E4C421;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.gs-hero-visual {
+  flex: 1;
+  position: relative;
+  min-height: 400px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.gs-hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* Value Proposition */
+.gs-value-prop {
+  padding: 6rem 0;
+}
+
+.gs-section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.gs-section-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.gs-section-header p {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.gs-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.gs-feature-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+}
+
+.gs-feature-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.gs-feature-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Social Proof */
+.gs-social-proof {
+  padding: 4rem 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  margin: 4rem 0;
+  text-align: center;
+}
+
+.gs-social-proof h2 {
+  margin-bottom: 3rem;
+  color: #ffffff;
+}
+
+.gs-logos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.gs-logo-item {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #E4C421;
+  opacity: 0.8;
+}
+
+/* Process Steps */
+.gs-process {
+  padding: 6rem 0;
+}
+
+.gs-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.gs-step {
+  text-align: center;
+  padding: 2rem;
+  color: #ffffff;
+}
+
+.gs-step-number {
+  width: 50px;
+  height: 50px;
+  background: #E4C421;
+  color: #0F0F0F;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  margin: 0 auto 1.5rem;
+}
+
+/* Final CTA */
+.gs-final-cta {
+  text-align: center;
+  padding: 6rem 0;
+  background: linear-gradient(135deg, #441a49, #1a5d5d);
+  color: white;
+  border-radius: 16px;
+  margin-bottom: 4rem;
+}
+
+.gs-final-cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.gs-final-cta p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.gs-primary-cta.gs-large {
+  padding: 1.25rem 3rem;
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .gs-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 4rem 0;
+    gap: 3rem;
+  }
+  
+  .gs-cta-group {
+    justify-content: center;
+  }
+  
+  .gs-hero-visual {
+    width: 100%;
+    min-height: 300px;
+  }
+
+  .gs-hero h1 {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .gs-container {
+    padding: 0 1.5rem;
+  }
+  
+  .gs-hero h1 {
+    font-size: 2.2rem;
+  }
+  
+  .gs-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .gs-cta-group {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .gs-primary-cta,
+  .gs-secondary-cta {
+    width: 100%;
+    text-align: center;
+  }
+
+  .gs-section-header h2 {
+    font-size: 2rem;
+  }
+
+  .gs-final-cta h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gs-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .gs-feature-card,
+  .gs-step {
+    padding: 1.5rem;
+  }
+}

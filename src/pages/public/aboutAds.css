@@ -1,0 +1,156 @@
+
+.af-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  color: #ffffff;
+}
+
+.af-hero {
+  text-align: center;
+  padding: 5rem 0;
+}
+
+.af-hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.af-hero h1 span {
+  color: #E4C421;
+}
+
+.af-hero p {
+  font-size: 1.25rem;
+  opacity: 0.9;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.af-formats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  padding-bottom: 5rem;
+}
+
+.af-format-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.af-format-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.af-format-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.af-format-icon {
+  font-size: 2rem;
+}
+
+.af-format-header h2 {
+  font-size: 1.75rem;
+  margin: 0;
+}
+
+.af-specs h3,
+.af-benefits h3,
+.af-insight h3,
+.af-best-for h3 {
+  font-size: 1.25rem;
+  margin: 1.5rem 0 1rem;
+  color: #E4C421;
+}
+
+.af-specs ul,
+.af-benefits ul {
+  list-style: none;
+  padding: 0;
+}
+
+.af-specs li,
+.af-benefits li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.af-benefits li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.af-benefits li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #E4C421;
+}
+
+.af-insight p {
+  background: rgba(228, 196, 33, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 3px solid #E4C421;
+}
+
+.af-cta-example {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  font-family: monospace;
+}
+
+.af-best-for {
+  margin-top: 2rem;
+}
+
+.af-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.af-tag {
+  background: rgba(228, 196, 33, 0.15);
+  color: #E4C421;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .af-hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .af-formats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .af-container {
+    padding: 0 1.5rem;
+  }
+  
+  .af-hero {
+    padding: 3rem 0;
+  }
+  
+  .af-hero h1 {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,223 @@
+/* ===== Color Variables ===== */
+:root {
+  --primary: #6E00FF;
+  --secondary: #FF00A8;
+  --accent: #E4C421;
+  --dark: #0F0F0F;
+  --light: #FFFFFF;
+  --gray: #F5F5F7;
+}
+
+/* ===== Base Styles ===== */
+.pricing-section {
+  padding: 4rem 2rem;
+  background: var(--dark);
+  color: var(--light);
+  font-family: 'Inter', sans-serif;
+}
+
+.pricing-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.pricing-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.pricing-header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* ===== Pricing Grid ===== */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(110, 0, 255, 0.2);
+}
+
+/* Card Header */
+.card-header {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(110, 0, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.audio-card .card-icon {
+  color: var(--primary);
+}
+
+.visual-card .card-icon {
+  color: var(--secondary);
+}
+
+.spotlight-card .card-icon {
+  color: var(--accent);
+}
+
+.bundle-card .card-icon {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+}
+
+.card-header h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-header p {
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+.popular-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: var(--accent);
+  color: var(--dark);
+  padding: 0.3rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Price Display */
+.card-price {
+  margin: 1.5rem 0;
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.duration {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+/* Features List */
+.card-features {
+  margin: 2rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card-features li {
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.card-features li:before {
+  content: "•";
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+}
+
+/* CTA Button */
+.card-cta {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.audio-card .card-cta {
+  background: var(--primary);
+  color: white;
+}
+
+.visual-card .card-cta {
+  background: var(--secondary);
+  color: white;
+}
+
+.spotlight-card .card-cta {
+  background: var(--accent);
+  color: var(--dark);
+}
+
+.bundle-card .card-cta {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+}
+
+.card-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer */
+.pricing-footer {
+  text-align: center;
+  margin-top: 3rem;
+  opacity: 0.8;
+}
+
+.pricing-footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .pricing-header h2 {
+    font-size: 2rem;
+  }
+  
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pricing-section {
+    padding: 3rem 1rem;
+  }
+  
+  .price {
+    font-size: 2rem;
+  }
+}
