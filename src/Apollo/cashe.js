@@ -1,26 +1,20 @@
-
-
 import { makeVar, InMemoryCache } from '@apollo/client';
 import advertizerAuth from '../utils/advertizerAuth';
 
-// Reactive variable to track login status
+// ✅ Reactive var for login status
 export const isLoggedInVar = makeVar(advertizerAuth.isAdvertizer());
 
-// Reactive variable to hold user profile data
-export const userDataVar = makeVar(() => {
-  const profile = advertizerAuth.getProfile();
-  return profile
-    ? {
-        id: profile.sub || profile.id,
-        name: profile.name || '',
-        email: profile.email || '',
-        role: profile.role || 'advertiser',
-        avatar: profile.picture || profile.avatar || ''
-      }
-    : null;
-})();
+// ✅ Reactive var for user profile
+const profile = advertizerAuth.getProfile();
+export const userDataVar = makeVar(profile ? {
+  id: profile.sub || profile.id || profile._id || '',
+  name: profile.fullName || profile.name || '',
+  email: profile.businessEmail || profile.email || '',
+  role: profile.role || 'advertizer',
+  avatar: profile.picture || profile.avatar || ''
+} : null);
 
-// Apollo Cache configuration
+// ✅ Apollo cache setup
 export const cache = new InMemoryCache({
   typePolicies: {
     Query: {

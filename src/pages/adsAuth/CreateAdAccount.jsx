@@ -22,6 +22,7 @@ const TERMS_VERSION = "v1.0";
 
 
 const CreateAdAccount = () => {
+  const [businessEmail, setBusinessEmail] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     companyName: '',
@@ -78,6 +79,9 @@ const CreateAdAccount = () => {
         }
       });
 
+      setBusinessEmail(formData.businessEmail);
+
+
       if (!data?.registerAdvertizer?.advertizerToken) {
         setError("No token received from server");
         return;
@@ -98,12 +102,23 @@ const CreateAdAccount = () => {
   if (err.graphQLErrors?.length > 0) {
     const gqlError = err.graphQLErrors[0];
     const code = gqlError.extensions?.code;
+    
+    if (code === 'EMAIL_ALREADY_CONFIRMED') {
+  setError('This email is already in use. Please login instead.');
+} else if (code === 'EMAIL_NOT_CONFIRMED_RESENT') {
+  setError(gqlError.message);
+  // Optional: navigate to verification page
+  setTimeout(() => navigate('/verify-email'), 1500);
+}
+
 
     if (code === 'EMAIL_ALREADY_EXISTS') {
       setError(gqlError.message);
     } else {
       setError('Something went wrong: ' + gqlError.message);
     }
+
+
   } else if (err.networkError) {
     setError('Network error: Please check your connection or try again later.');
   } else {

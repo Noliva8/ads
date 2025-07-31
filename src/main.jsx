@@ -28,6 +28,8 @@ import NotFound from "./pages/dashboardPages/NotFound";
 import VerifyPhone from "./pages/adsAuth/VerifyPhone";
 import VerifyEmail from "./pages/adsAuth/VerifyEmail";
 import ResendVerifyEmail from "./pages/adsAuth/resendVerifyEmail";
+import AudienceInsights from "./pages/dashboardPages/AudienceInsights";
+import HelpCenter from "./pages/dashboardPages/HelpCenter";
 
 // Admin pages
 import AdminLayout from "./pages/Admin/AdminLayout";
@@ -57,17 +59,36 @@ import Analytics from "./components/Analytics/analytics";
 const LazyPricing = React.lazy(() => import("./pages/public/Pricing"));
 const LazySupport = React.lazy(() => import("./pages/public/Support"));
 
+import { CssBaseline } from "@mui/material";
+
+
+
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
-      main: "#441a49",
+      main: '#441a49',
     },
     secondary: {
-      main: "#1a5d5d",
+      main: '#1a5d5d',
     },
-    // ... rest of your theme
+    background: {
+      default: '#121212',
+      paper: '#1e1e1e',
+    },
+    text: {
+      primary: 'rgba(255, 255, 255, 0.92)',
+      secondary: 'rgba(255, 255, 255, 0.7)',
+    },
+  },
+  typography: {
+    fontFamily: 'Roboto, sans-serif',
+    fontSize: 16,
   },
 });
+
+
+
 
 // 🔗 Register the Apollo updaters
 advertizerAuth.setOnLogin((profile) => {
@@ -105,15 +126,16 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+      // 🌟 Public pages
       { index: true, element: <GetStarted /> },
       { path: "about-ads", element: <AboutAds /> },
       { path: "account", element: <AccountInfo /> },
       { path: "Ads-campain", element: <CampaignGoals /> },
       { path: "Creative-Studio", element: <CreativeLab /> },
 
+      // 🌟 Auth pages
       { path: "ad-account-login", element: <AdAccountLogin /> },
       { path: "ad-account-signup", element: <CreateAdAccount /> },
-
       {
         path: "verify-email",
         element: (
@@ -122,11 +144,10 @@ const router = createBrowserRouter([
           </VerifyEmailProtectedRoute>
         ),
       },
-
       { path: "verify-phone", element: <VerifyPhone /> },
-       { path: "resend-email-verification-link", element: <ResendVerifyEmail /> },
+      { path: "resend-email-verification-link", element: <ResendVerifyEmail /> },
 
-
+      // 🌟 Lazy-loaded pages
       {
         path: "pricing",
         element: (
@@ -135,7 +156,6 @@ const router = createBrowserRouter([
           </React.Suspense>
         ),
       },
-
       {
         path: "support",
         element: (
@@ -144,30 +164,42 @@ const router = createBrowserRouter([
           </React.Suspense>
         ),
       },
-    ],
-  },
-  {
-    path: "/dashboard",
-    element: (
-      <ProtectedAdvertizerRoute>
-        <DashboardLayout />
-      </ProtectedAdvertizerRoute>
-    ),
-    children: [
-      { index: true, element: <Overview /> },
+
+      // ✅ DASHBOARD (now nested inside /)
       {
-        path: "campaigns",
-        element: <Campaigns />,
+        path: "dashboard",
+        element: (
+          <ProtectedAdvertizerRoute>
+            <DashboardLayout />
+          </ProtectedAdvertizerRoute>
+        ),
+        children: [
+          { index: true, element: <Overview /> },
+          { path: "campaigns", element: <Campaigns /> },
+          { path: "billing", element: <Billing /> },
+          { path: "upload", element: <UploadAd /> },
+          { path: "settings", element: <Settings /> },
+          {
+  path: "analytics",
+  element: <Analytics />,
+},
+{
+  path: "audience",
+  element: <AudienceInsights />,
+},
+{
+  path: "help",
+  element: <HelpCenter />,
+},
+
+
+
+        ],
       },
-      { path: "billing", element: <Billing /> },
-      {
-        path: "upload",
-        element: <UploadAd />,
-      },
-      { path: "settings", element: <Settings /> },
     ],
   },
 
+  // ✅ Admin remains outside
   {
     path: "/admin",
     element: (
@@ -182,15 +214,18 @@ const router = createBrowserRouter([
     ],
   },
 
+  // 🔥 Catch-all 404
   {
     path: "*",
     element: <NotFound />,
   },
 ]);
 
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+       <CssBaseline />
       <ApolloProvider client={client}>
         <AuthProvider>
           <RouterProvider router={router} />

@@ -1,66 +1,72 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { List, ListItem, ListItemIcon, ListItemText, Divider, styled } from '@mui/material';
 import {
-  Dashboard as DashboardIcon,
-  Campaign as CampaignIcon,
-  Payment as PaymentIcon,
-  Upload as UploadIcon,
-  Settings as SettingsIcon
-} from '@mui/icons-material';
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  IconButton,
+  Toolbar,
+  Typography,
+  Box,
+} from '@mui/material';
+import { ChevronLeft, Menu } from '@mui/icons-material';
+import { SidebarIcons } from './sidebarIcons';
 
-const SidebarContainer = styled('div')({
-  width: '240px',
-  height: '100vh',
-  position: 'fixed',
-  left: 0,
-  top: 0,
-  paddingTop: '64px', // header height
-  backgroundColor: 'var(--bg-secondary)',
-  color: 'var(--primary-font-color)',
-});
+const menuItems = [
+  { text: 'Dashboard', icon: <SidebarIcons.Dashboard />, path: '/dashboard' },
+  { text: 'Campaigns', icon: <SidebarIcons.Campaigns />, path: '/dashboard/campaigns' },
+  { text: 'Analytics', icon: <SidebarIcons.Analytics />, path: '/dashboard/analytics' },
+  { text: 'Audience', icon: <SidebarIcons.Audience />, path: '/dashboard/audience' },
+  { text: 'Upload', icon: <SidebarIcons.Upload />, path: '/dashboard/upload' },
+  { text: 'Billing', icon: <SidebarIcons.Billing />, path: '/dashboard/billing' },
+  { text: 'Reports', icon: <SidebarIcons.Reports />, path: '/dashboard/reports' },
+  { text: 'Settings', icon: <SidebarIcons.Settings />, path: '/dashboard/settings' },
+];
 
-const StyledListItem = styled(ListItem)(({ theme, selected }) => ({
-  '&.Mui-selected': {
-    backgroundColor: 'var(--rust)',
-    '&:hover': {
-      backgroundColor: 'var(--rust-hover)',
-    }
-  },
-  '&:hover': {
-    backgroundColor: 'var(--bg-primary)',
-  }
-}));
-
-const Sidebar = () => {
+const Sidebar = ({ collapsed = false, onToggleCollapse, onClose }) => {
   const location = useLocation();
 
-  const menuItems = [
-    { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
-    { text: 'Campaigns', icon: <CampaignIcon />, path: '/dashboard/campaigns' },
-    { text: 'Billing', icon: <PaymentIcon />, path: '/dashboard/billing' },
-    { text: 'Upload Ad', icon: <UploadIcon />, path: '/dashboard/upload' },
-    { text: 'Settings', icon: <SettingsIcon />, path: '/dashboard/settings' },
-  ];
-
   return (
-    <SidebarContainer>
+    <Box sx={{ height: '100%' }}>
+      <Toolbar
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          px: 2,
+        }}
+      >
+        {!collapsed && <Typography variant="h6">Advertizer</Typography>}
+        {onToggleCollapse && (
+          <IconButton onClick={onToggleCollapse}>
+            {collapsed ? <Menu /> : <ChevronLeft />}
+          </IconButton>
+        )}
+      </Toolbar>
+      <Divider />
       <List>
-        {menuItems.map((item) => (
-          <StyledListItem
-            button
-            key={item.text}
-            component={Link}
-            to={item.path}
-            selected={location.pathname === item.path}
-          >
-            <ListItemIcon sx={{ color: 'var(--gold)' }}>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} />
-          </StyledListItem>
-        ))}
+        {menuItems.map((item) => {
+          const isActive = location.pathname.startsWith(item.path);
+          return (
+            <ListItem
+              button
+              key={item.text}
+              component={Link}
+              to={item.path}
+              onClick={onClose}
+              selected={isActive}
+              sx={{ pl: collapsed ? 2 : 3 }}
+            >
+              <ListItemIcon sx={{ color: 'inherit', minWidth: 0, mr: collapsed ? 'auto' : 2 }}>
+                {item.icon}
+              </ListItemIcon>
+              {!collapsed && <ListItemText primary={item.text} />}
+            </ListItem>
+          );
+        })}
       </List>
-      <Divider sx={{ backgroundColor: 'var(--border-color)' }} />
-    </SidebarContainer>
+    </Box>
   );
 };
 

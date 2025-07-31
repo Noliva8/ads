@@ -6,11 +6,12 @@ import advertizerAuth from '../utils/advertizerAuth';
 const ProtectedAdvertizerRoute = ({ children }) => {
   const profile = advertizerAuth.getProfile();
 
+console.log('check profile:', profile)
   if (!advertizerAuth.isAdvertizer()) {
     return <Navigate to="/ad-account-login" />;
   }
 
-  if (!profile?.isConfirmed) {
+  if (!profile?.data?.isConfirmed) {
     return <Navigate to="/verify-email" />;
   }
 

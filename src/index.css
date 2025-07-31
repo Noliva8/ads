@@ -1,15 +1,55 @@
 /* index.css */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Color System */
+  --bg-primary: #121212; /* Deep dark for main bg */
+  --bg-secondary: #1e1e1e; /* Cards, sidebar */
+  --bg-tertiary: #252525; /* Hover states */
+  --bg-overlay: rgba(0, 0, 0, 0.7); /* Modals/backdrops */
+  
+  --primary-accent: #FF7D45; /* Primary CTA color (adjusted rust) */
+  --primary-accent-hover: #E56A36; 
+  --secondary-accent: #FFB45B; /* Gold for highlights */
+  
+  --text-primary: rgba(255, 255, 255, 0.92);
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-disabled: rgba(255, 255, 255, 0.5);
+  
+  /* Status Colors */
+  --success: #4CAF50;
+  --warning: #FF9800;
+  --error: #F44336;
+  --info: #2196F3;
+  
+  /* Borders */
+  --border-light: rgba(255, 255, 255, 0.12);
+  --border-medium: rgba(255, 255, 255, 0.2);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.32);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  
+  /* Spacing System */
+  --space-unit: 8px;
+  --space-xs: calc(var(--space-unit) * 0.5);
+  --space-sm: calc(var(--space-unit) * 1);
+  --space-md: calc(var(--space-unit) * 2);
+  --space-lg: calc(var(--space-unit) * 3);
+  --space-xl: calc(var(--space-unit) * 4);
+  
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Roboto Mono', monospace;
+  --font-size-base: 14px;
+  --line-height-base: 1.5;
+  
+  /* Z-index */
+  --z-sidebar: 100;
+  --z-header: 110;
+  --z-modal: 1000;
 }
+
+
 
 /* Reset and base styles */
 * {
@@ -22,7 +62,15 @@ html, body {
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
+
+    background-color: var(--bg-primary);
+  font-family: var(--font-family);
+  margin: 0;
+  color: var(--text-primary);
 }
+
+
+
 
 body {
   background-color: #242424;

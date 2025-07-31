@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiLock, FiMail } from 'react-icons/fi';
 import './AuthForms.css';
+import { useMutation } from '@apollo/client';
+import { ADVERTIZER_LOGIN } from '../../utils/mutation';
+import advertizerAuth from '../../utils/advertizerAuth';
+import { isLoggedInVar, userDataVar } from '../../Apollo/cashe';
 
 const AdAccountLogin = () => {
   const [email, setEmail] = useState('');
@@ -10,16 +14,55 @@ const AdAccountLogin = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const [loginAdvertizer] = useMutation(ADVERTIZER_LOGIN);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+    setError('');
+
     try {
-      // Replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      navigate('/dashboard'); // Redirect on success
+      const { data } = await loginAdvertizer({
+        variables: {
+          businessEmail: email,
+          password: password,
+        },
+      });
+
+      const advertizerPayload = data?.loginAdvertizer;
+
+      if (!advertizerPayload?.advertizer) {
+        setError('Something went wrong. Please try again.');
+        return;
+      }
+
+      const { advertizerToken, advertizer } = advertizerPayload;
+
+      if (!advertizer.isConfirmed) {
+        setError('Your email is not verified. A new verification email has been sent.');
+        return;
+      }
+
+      // ✅ Store tokens
+      await advertizerAuth.login({
+        idToken: advertizerToken,
+        refreshToken: null,
+      });
+
+      // ✅ Update Apollo reactive state manually
+      isLoggedInVar(true);
+      userDataVar({
+        id: advertizer._id,
+        name: advertizer.fullName,
+        email: advertizer.businessEmail,
+        role: advertizer.role,
+        avatar: ''
+      });
+
+      // ✅ No need for navigate, handled in advertizerAuth.login()
     } catch (err) {
-      setError('Invalid credentials. Please try again.');
+      const msg = err?.graphQLErrors?.[0]?.message || 'Login failed. Try again.';
+      setError(msg);
     } finally {
       setLoading(false);
     }

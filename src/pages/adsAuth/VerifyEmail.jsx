@@ -1,50 +1,112 @@
-import { useState } from 'react';
-import { Box, Typography, Button, CircularProgress, Alert } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import './verify.css';
+import advertizerAuth from '../../utils/advertizerAuth';
+import { RESEND_ADVERTIZER_EMAIL_TOKEN } from '../../utils/mutation';
+import { useMutation } from '@apollo/client';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
-export default function VerifyEmail() {
-  const [loading, setLoading] = useState(false);
-  const [sent, setSent] = useState(false);
 
-  const handleResendEmail = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSent(true);
-    }, 1500); // simulate async
+const VerifyEmail = () => {
+  const [resendAdvertizerVerificationEmail, { data, loading, error }] = useMutation(RESEND_ADVERTIZER_EMAIL_TOKEN);
+  const [countdown, setCountdown] = useState(30);
+  const [isResendDisabled, setIsResendDisabled] = useState(true);
+  const [businessEmail, setBusinessEmail] = useState('');
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const status = searchParams.get('status');
+
+  // Get business email from auth
+  useEffect(() => {
+    const profile = advertizerAuth.getProfile();
+    const email = profile?.data?.businessEmail;
+    if (email) {
+      setBusinessEmail(email);
+    }
+  }, []);
+
+  // Countdown timer logic
+  useEffect(() => {
+    let timer;
+    if (countdown > 0) {
+      timer = setTimeout(() => setCountdown((prev) => prev - 1), 1000);
+    } else {
+      setIsResendDisabled(false);
+    }
+    return () => clearTimeout(timer);
+  }, [countdown]);
+
+  // Handle resend button click
+  const handleResend = () => {
+    if (isResendDisabled || !businessEmail) return;
+
+    resendAdvertizerVerificationEmail({ variables: { businessEmail } });
+    setCountdown(30);
+    setIsResendDisabled(true);
   };
 
+  // Debugging or toast purposes
+  useEffect(() => {
+    if (data?.resendAdvertizerVerificationEmail?.success) {
+      console.log('✅', data.resendAdvertizerVerificationEmail.message);
+    }
+    if (error) {
+      console.error('❌', error.message);
+    }
+  }, [data, error]);
+
   return (
-    <Box 
-      sx={{ 
-        minHeight: '100vh', 
-        display: 'flex', 
-        flexDirection: 'column', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        px: 3 
-      }}
-    >
-      <Typography variant="h4" gutterBottom>
-        Verify Your Email
-      </Typography>
-      <Typography variant="body1" color="text.secondary" sx={{ mb: 3, textAlign: 'center' }}>
-        We’ve sent a verification link to your email address. Please check your inbox and follow the link to verify your email.
-      </Typography>
+    <div className="email-verification-wrapper">
+      <div className="email-verification-card">
 
-      <Button 
-        variant="contained" 
-        onClick={handleResendEmail} 
-        disabled={loading}
-        sx={{ mb: 2 }}
-      >
-        {loading ? <CircularProgress size={24} /> : 'Resend Email'}
-      </Button>
+        {/* ✅ Just Verified */}
+        {status === 'verified' && (
+          <>
+            <h2>Email Verified ✅</h2>
+            <p>Your email has been verified. You can now log in to your advertiser account.</p>
+            <button className="auth-button" onClick={() => navigate('/ad-account-login')}>
+              Go to Login
+            </button>
+          </>
+        )}
 
-      {sent && (
-        <Alert severity="success" sx={{ mt: 1 }}>
-          Verification email has been sent.
-        </Alert>
-      )}
-    </Box>
+        {/* ⚠️ Already Verified */}
+        {status === 'already' && (
+          <>
+            <h2>Email Already Verified</h2>
+            <p>This email is already verified. Please login to continue.</p>
+            <button className="auth-button" onClick={() => navigate('/ad-account-login')}>
+              Go to Login
+            </button>
+          </>
+        )}
+
+        {/* ⏳ Normal flow (no status param) */}
+        {!status && (
+          <>
+            <h2>Verify Your Email</h2>
+            <p>
+              We've sent a verification link to <span className="highlight">{businessEmail}</span>. <br />
+              Please check your inbox and click the link to verify your email address.
+            </p>
+            <p>If you don't see the email, check your spam folder or resend it below.</p>
+
+            <div className="actions">
+              <button
+                className="resend-button"
+                onClick={handleResend}
+                disabled={isResendDisabled || loading}
+              >
+                {loading ? 'Sending...' : 'Resend Verification Email'}
+              </button>
+              {isResendDisabled && (
+                <span className="timer">Resend available in {countdown} seconds</span>
+              )}
+            </div>
+          </>
+        )}
+      </div>
+    </div>
   );
-}
+};
+
+export default VerifyEmail;
