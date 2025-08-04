@@ -1,73 +1,37 @@
-// components/Layout/DashboardHeader.jsx
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { Typography, Avatar, IconButton, Box, Button } from '@mui/material';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import AddIcon from '@mui/icons-material/Add';
+import { useState } from 'react';
+import { FiMenu, FiSearch, FiBell } from 'react-icons/fi';
 
-const DashboardHeader = () => {
-  const location = useLocation();
-
-  const pageTitle = {
-    '/dashboard': 'Overview',
-    '/dashboard/campaigns': 'Campaigns',
-    '/dashboard/upload': 'Upload Ad',
-    '/dashboard/billing': 'Billing',
-    '/dashboard/settings': 'Settings',
-    '/dashboard/analytics': 'Analytics',
-    '/dashboard/audience': 'Audience Insights',
-    '/dashboard/help': 'Help Center',
-  }[location.pathname] || 'Dashboard';
-
-
-
+const DashboardHeader = ({ toggleSidebar }) => {
+  const [searchQuery, setSearchQuery] = useState('');
 
   return (
-    <Box
-      display="flex"
-      justifyContent="space-between"
-      alignItems="center"
-      mb={3}
-      px={2}
-      py={1.5}
-      sx={{
-        borderBottom: '1px solid var(--border-color)',
-        backgroundColor: 'var(--bg-secondary)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 99,
-      }}
-    >
-      <Typography variant="h5" fontWeight="bold" color="var(--primary-font-color)">
-        {pageTitle}
-      </Typography>
-
-      <Box display="flex" alignItems="center" gap={2}>
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          sx={{ backgroundColor: 'var(--rust)', textTransform: 'none' }}
-        >
-          Create Campaign
-        </Button>
-        <IconButton>
-          <NotificationsIcon sx={{ color: 'var(--primary-font-color)' }} />
-        </IconButton>
-        <Avatar
-          alt="Advertiser"
-          src="/placeholder-avatar.jpg"
-          sx={{ width: 36, height: 36 }}
-        />
-      </Box>
-    </Box>
+    <header className="dashboard-header">
+      <div className="header-left">
+        <button className="sidebar-toggle" onClick={toggleSidebar}>
+          <FiMenu />
+        </button>
+        <div className="header-search">
+          <FiSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search campaigns, reports..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+      </div>
+      <div className="header-actions">
+        <button className="btn-notification">
+          <FiBell />
+          <span className="notification-badge">3</span>
+        </button>
+        <div className="user-profile">
+          <img src="/default-profile.jpg" alt="User profile" />
+          <span>Admin</span>
+        </div>
+      </div>
+    </header>
   );
 };
 
 export default DashboardHeader;
-
-
-
-
-
-
-

@@ -1,136 +1,25 @@
-:root {
-  /* Color Variables */
-  --bg-primary: #0F0F0F;
-  --bg-secondary: #1A1A1A;
-  --primary-font-color: #FFFFFF;
-  --secondary-font-color: #D3D3D3;
-  --accent-gold: #E4C421;
-  --accent-gold-hover: #F8D347;
-  --accent-rust: #B25035;
-  --border-color: #333333;
-  
-  /* Layout Variables */
-  --header-height: 64px;
-  --sidebar-width: 240px;
-  --transition-speed: 0.3s;
+.no-padding {
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background-color: var(--bg-primary);
-  color: var(--primary-font-color);
-  font-family: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.6;
-}
-
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.app-content {
-  display: flex;
-  flex-grow: 1;
-  padding-top: var(--header-height);
-}
 
 .app-content.no-layout {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  min-height: 100vh; /* ensures it still fills the screen without header/footer */
-  background: #000;  
+
+ 
 }
 
 
-/* Sidebar Styles */
-.with-sidebar {
-  margin-left: var(--sidebar-width);
-  transition: margin var(--transition-speed) ease-out;
+.app-container{
+  display: flex;
+  flex-direction: column;
 }
 
-.main-content {
-  flex-grow: 1;
-  padding: 2rem;
-  min-height: calc(100vh - var(--header-height));
-  background-color: var(--bg-primary);
-  transition: margin var(--transition-speed) ease;
-
-}
-
-.no-padding {
-  padding: 0 !important;
-}
-
-
-.sidebar-open {
-  margin-left: var(--sidebar-width);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .app-content {
-    flex-direction: column;
-  }
-  
-  .with-sidebar {
-    margin-left: 0;
-  }
-  
-  .sidebar-open {
-    margin-left: 0;
-  }
-  
-  .main-content {
-    padding: 1rem;
-  }
-}
-
-/* Animation Classes */
-.fade-in {
-  animation: fadeIn var(--transition-speed) ease-in;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.slide-in {
-  animation: slideIn var(--transition-speed) ease-out;
-}
-
-@keyframes slideIn {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
-}
-
-
-
-
-
-
-
-/* Add this temporarily to your global CSS */
-.debug-outline * {
-  outline: 1px solid red !important;
-}
-
-.app-container.debug-outline {
-  outline: 2px solid blue !important;
-}
-
-.app-content.debug-outline {
-  outline: 2px solid green !important;
-}
-
-.main-content.debug-outline {
-  outline: 2px solid purple !important;
+.main-content{
+  display: flex;
+  flex-direction: column;
 }

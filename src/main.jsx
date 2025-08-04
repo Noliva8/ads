@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ApolloProvider } from "@apollo/client";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -18,8 +18,9 @@ import CreateAdAccount from "./pages/adsAuth/CreateAdAccount";
 import AdAccountLogin from "./pages/adsAuth/AdAccountLogin";
 
 // Dashboard pages
-import DashboardLayout from "./pages/dashboardPages/DashboardLayout";
-import Overview from "./pages/dashboardPages/Overview";
+// import AdsDashboardLayout from "./pages/dashboardPages/DashboardLayout";
+import Dashboard from "./pages/dashboardPages/dashboard";
+import Overview from "./pages/dashboardPages/overview";
 import Campaigns from "./pages/dashboardPages/Campaigns";
 import Billing from "./pages/dashboardPages/Billing";
 import UploadAd from "./pages/dashboardPages/UploadAd";
@@ -59,33 +60,35 @@ import Analytics from "./components/Analytics/analytics";
 const LazyPricing = React.lazy(() => import("./pages/public/Pricing"));
 const LazySupport = React.lazy(() => import("./pages/public/Support"));
 
-import { CssBaseline } from "@mui/material";
 
 
 
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#441a49',
-    },
-    secondary: {
-      main: '#1a5d5d',
-    },
-    background: {
-      default: '#121212',
-      paper: '#1e1e1e',
-    },
-    text: {
-      primary: 'rgba(255, 255, 255, 0.92)',
-      secondary: 'rgba(255, 255, 255, 0.7)',
-    },
-  },
-  typography: {
-    fontFamily: 'Roboto, sans-serif',
-    fontSize: 16,
-  },
-});
+
+
+
+// const theme = createTheme({
+//   palette: {
+//     mode: 'dark',
+//     primary: {
+//       main: '#441a49',
+//     },
+//     secondary: {
+//       main: '#1a5d5d',
+//     },
+//     background: {
+//       default: '#121212',
+//       paper: '#1e1e1e',
+//     },
+//     text: {
+//       primary: 'rgba(255, 255, 255, 0.92)',
+//       secondary: 'rgba(255, 255, 255, 0.7)',
+//     },
+//   },
+//   typography: {
+//     fontFamily: 'Roboto, sans-serif',
+//     fontSize: 16,
+//   },
+// });
 
 
 
@@ -170,7 +173,7 @@ const router = createBrowserRouter([
         path: "dashboard",
         element: (
           <ProtectedAdvertizerRoute>
-            <DashboardLayout />
+            <Dashboard/>
           </ProtectedAdvertizerRoute>
         ),
         children: [
@@ -196,6 +199,7 @@ const router = createBrowserRouter([
 
         ],
       },
+      
     ],
   },
 
@@ -223,14 +227,16 @@ const router = createBrowserRouter([
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
+  
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-       <CssBaseline />
+   
+   
       <ApolloProvider client={client}>
         <AuthProvider>
           <RouterProvider router={router} />
         </AuthProvider>
       </ApolloProvider>
-    </ThemeProvider>
+ 
+ 
   </React.StrictMode>
 );

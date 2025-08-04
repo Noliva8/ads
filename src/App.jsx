@@ -10,13 +10,24 @@ import Sidebar from './components/Layout/Sidebar';
 import LoadingSpinner from './components/ui/LoadingSpinner.jsx';
 import ToastNotifications from './components/ui/ToastNotifications.jsx';
 
+// main content
+import AppBar from './pages/dashboardPages/global/AppBar.jsx';
 
+// auth
 import advertizerAuth from './utils/advertizerAuth.js';
+// theme
+import { CssBaseline,ThemeProvider } from "@mui/material";
+import { ColorModeContext, useMode } from './theme.js';
+
+import SideBar from './pages/dashboardPages/global/SideBar.jsx';
+
 
 
 
 const App = () => {
-  console.log('helloo')
+
+  const [theme, colorMode] = useMode();
+ 
   const location = useLocation();
   const isDashboard = location.pathname.startsWith('/dashboard');
 
@@ -30,9 +41,9 @@ const App = () => {
       setIsLoggedIn(loggedIn);
       setProfile(prof);
 
-      // ✅ Only log after token is read
-      console.log("✅ Is Logged In:", loggedIn);
-      console.log("🧠 Profile structure:", prof);
+      // // ✅ Only log after token is read
+      // console.log("✅ Is Logged In:", loggedIn);
+      // console.log("🧠 Profile structure:", prof);
     };
 
     checkAuth();
@@ -47,25 +58,28 @@ const App = () => {
   const hideLayout = authPages.includes(location.pathname);
 
   return (
+     <ColorModeContext.Provider value={colorMode}>
+
+       <ThemeProvider theme={theme}>
+       <CssBaseline />
+       
+
     <div className={`app-container ${hideLayout ? 'hide-layout' : ''}`}>
+
       {!isDashboard && !hideLayout && <Header />}
-
-      <div className={`app-content ${isLoggedIn && isDashboard ? 'with-sidebar' : ''} ${hideLayout ? 'no-layout' : ''}`}>
-        {isLoggedIn && isDashboard && <Sidebar />}
-
-        <main className={`main-content 
-          ${isLoggedIn && isDashboard ? 'sidebar-open' : ''} 
-          ${hideLayout ? 'no-padding' : ''}`}>
-
+        <main className="main-content">
           <React.Suspense fallback={<LoadingSpinner fullPage />}>
             <ToastNotifications />
             <Outlet />
           </React.Suspense>
         </main>
-      </div>
-
+     
       {!isDashboard && !hideLayout && <Footer />}
     </div>
+    
+ </ThemeProvider>
+    </ColorModeContext.Provider>
+      
   );
 };
 

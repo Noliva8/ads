@@ -58,15 +58,13 @@
   padding: 0;
 }
 
-html, body {
+html, body, .main-content {
   width: 100%;
+
   min-height: 100vh;
   overflow-x: hidden;
 
-    background-color: var(--bg-primary);
-  font-family: var(--font-family);
-  margin: 0;
-  color: var(--text-primary);
+  
 }
 
 
@@ -121,4 +119,27 @@ button:focus-visible {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+
+
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track{
+  background: #e0e0e0
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb{
+   background: #888;
+}
+
+/* Handle on havor */
+::-webkit-scrollbar-track:hover{
+  background: #555
 }

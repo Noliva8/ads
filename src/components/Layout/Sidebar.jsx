@@ -1,72 +1,60 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import {
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Divider,
-  IconButton,
-  Toolbar,
-  Typography,
-  Box,
-} from '@mui/material';
-import { ChevronLeft, Menu } from '@mui/icons-material';
-import { SidebarIcons } from './sidebarIcons';
+import { NavLink } from 'react-router-dom';
+import { 
+  FiHome, 
+  FiTarget, 
+  FiBarChart2, 
+  FiUsers, 
+  FiCreditCard, 
+  FiSettings 
+} from 'react-icons/fi';
+import { Drawer, useMediaQuery } from '@mui/material';
 
-const menuItems = [
-  { text: 'Dashboard', icon: <SidebarIcons.Dashboard />, path: '/dashboard' },
-  { text: 'Campaigns', icon: <SidebarIcons.Campaigns />, path: '/dashboard/campaigns' },
-  { text: 'Analytics', icon: <SidebarIcons.Analytics />, path: '/dashboard/analytics' },
-  { text: 'Audience', icon: <SidebarIcons.Audience />, path: '/dashboard/audience' },
-  { text: 'Upload', icon: <SidebarIcons.Upload />, path: '/dashboard/upload' },
-  { text: 'Billing', icon: <SidebarIcons.Billing />, path: '/dashboard/billing' },
-  { text: 'Reports', icon: <SidebarIcons.Reports />, path: '/dashboard/reports' },
-  { text: 'Settings', icon: <SidebarIcons.Settings />, path: '/dashboard/settings' },
-];
-
-const Sidebar = ({ collapsed = false, onToggleCollapse, onClose }) => {
-  const location = useLocation();
+const Sidebar = ({ isMobile, mobileOpen, handleDrawerToggle }) => {
+  const navItems = [
+    { path: '/dashboard', icon: <FiHome />, label: 'Dashboard' },
+    { path: '/dashboard/campaigns', icon: <FiTarget />, label: 'Campaigns' },
+    { path: '/dashboard/analytics', icon: <FiBarChart2 />, label: 'Analytics' },
+    { path: '/dashboard/audiences', icon: <FiUsers />, label: 'Audiences' },
+    { path: '/dashboard/billing', icon: <FiCreditCard />, label: 'Billing' },
+    { path: '/dashboard/settings', icon: <FiSettings />, label: 'Settings' },
+  ];
 
   return (
-    <Box sx={{ height: '100%' }}>
-      <Toolbar
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          px: 2,
-        }}
-      >
-        {!collapsed && <Typography variant="h6">Advertizer</Typography>}
-        {onToggleCollapse && (
-          <IconButton onClick={onToggleCollapse}>
-            {collapsed ? <Menu /> : <ChevronLeft />}
-          </IconButton>
-        )}
-      </Toolbar>
-      <Divider />
-      <List>
-        {menuItems.map((item) => {
-          const isActive = location.pathname.startsWith(item.path);
-          return (
-            <ListItem
-              button
-              key={item.text}
-              component={Link}
-              to={item.path}
-              onClick={onClose}
-              selected={isActive}
-              sx={{ pl: collapsed ? 2 : 3 }}
-            >
-              <ListItemIcon sx={{ color: 'inherit', minWidth: 0, mr: collapsed ? 'auto' : 2 }}>
-                {item.icon}
-              </ListItemIcon>
-              {!collapsed && <ListItemText primary={item.text} />}
-            </ListItem>
-          );
-        })}
-      </List>
-    </Box>
+    <Drawer
+      variant={isMobile ? 'temporary' : 'permanent'}
+      open={isMobile ? mobileOpen : true}
+      onClose={handleDrawerToggle}
+      ModalProps={{ keepMounted: true }}
+      sx={{
+        '& .MuiDrawer-paper': {
+          width: 280,
+          boxSizing: 'border-box',
+          backgroundColor: '#1e1e1e',
+          color: 'rgba(255, 255, 255, 0.92)',
+          borderRight: '1px solid rgba(255, 255, 255, 0.12)'
+        },
+      }}
+    >
+      <div className="sidebar-brand">
+        <h2>AfroFeel Ads</h2>
+      </div>
+      <nav className="sidebar-nav">
+        {navItems.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            end={item.path === '/dashboard'}
+            className={({ isActive }) => 
+              `nav-item ${isActive ? 'active' : ''}`
+            }
+            onClick={isMobile ? handleDrawerToggle : undefined}
+          >
+            <span className="nav-icon">{item.icon}</span>
+            <span className="nav-label">{item.label}</span>
+          </NavLink>
+        ))}
+      </nav>
+    </Drawer>
   );
 };
 
