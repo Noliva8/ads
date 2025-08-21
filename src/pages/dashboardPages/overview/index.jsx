@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { 
-  Box, Grid, Typography, Card, CardContent, Button, 
+  Box, Typography, Card, CardContent, Button, 
   Divider, Chip, useTheme, IconButton 
 } from '@mui/material';
 
-
+import Grid from '@mui/material/Grid2';
 
 import { 
   AttachMoney, Campaign, Visibility, 
@@ -13,6 +13,16 @@ import {
   ArrowDropUp, ArrowDropDown, MoreVert 
 } from '@mui/icons-material';
 import { tokens } from '../../../theme';
+
+
+// project imports
+import AdDisplay from './subOverview/AdDisplay';
+
+
+
+
+
+
 
 // Mock data generators
 const generateTrendData = (days = 30) => {
@@ -83,7 +93,7 @@ const Overview = () => {
   return (
     <Box p={3}>
       {/* Header */}
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+      <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography variant="h4" fontWeight="bold" color={colors.graySoft[200]}>
           Advertiser Dashboard
         </Typography>
@@ -113,9 +123,9 @@ const Overview = () => {
 
 
       {/* Metric Cards */}
-      <Grid container spacing={3} mb={4}>
+     <Grid container columnSpacing={3} rowSpacing={3} mb={4}>
         {metrics.map((metric, i) => (
-          <Grid item xs={12} sm={6} md={3} key={i}>
+          <Grid key={i} size={{ xs: 12, sm: 6, md: 3 }}>
             <Card sx={{ 
               backgroundColor: colors.blackNeutral[600],
               borderRadius: '8px',
@@ -179,37 +189,30 @@ const Overview = () => {
         ))}
       </Grid>
 
+
+
+
+
+
       {/* Performance Charts */}
-      <Grid container spacing={3} mb={4}>
-        <Grid item xs={12} md={8}>
+      <Grid container columnSpacing={3} rowSpacing={3} mb={4}>
+
+          <Grid size={{ xs: 12, md: 8 }}>
           <Card sx={{ backgroundColor: colors.blackNeutral[600], borderRadius: '8px' }}>
             <CardContent>
-              <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+              <Box display="flex" justifyContent="space-between" alignItems="center" flexDirection='column' mb={2}>
                 <Typography variant="h6" fontWeight="bold">
-                  Performance Trend
-                </Typography>
-                <Box>
-                  {['7d', '30d', '90d'].map((range) => (
-                    <Button
-                      key={range}
-                      size="small"
-                      variant={timeRange === range ? 'contained' : 'text'}
-                      onClick={() => setTimeRange(range)}
-                      sx={{ 
-                        minWidth: 0,
-                        backgroundColor: timeRange === range ? colors.orange[500] : 'transparent',
-                        color: timeRange === range ? 'white' : colors.graySoft[400],
-                        '&:hover': {
-                          backgroundColor: timeRange === range ? colors.orange[600] : colors.blackNeutral[500]
-                        }
-                      }}
-                    >
-                      {range}
-                    </Button>
-                  ))}
-                </Box>
+                  Ads Management
+                </Typography >
+                <AdDisplay embedded height={420} onCreateClick={() => {/* navigate */}} />
               </Box>
               
+
+
+
+
+
+
               {/* Chart Placeholder - Replace with actual chart library */}
               <Box 
                 sx={{ 
@@ -238,7 +241,7 @@ const Overview = () => {
           </Card>
         </Grid>
         
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <Card sx={{ backgroundColor: colors.blackNeutral[600], borderRadius: '8px', height: '100%' }}>
             <CardContent>
               <Typography variant="h6" fontWeight="bold" mb={2}>
@@ -282,11 +285,20 @@ const Overview = () => {
         </Grid>
       </Grid>
 
+
+
       {/* Quick Actions & Recent Activity */}
       <Grid container spacing={3}>
-        <Grid item xs={12} md={4}>
-          <Card sx={{ backgroundColor: colors.blackNeutral[600], borderRadius: '8px' }}>
-            <CardContent>
+
+        <Grid size={{ xs: 12, md: 4 }}>
+         <Card sx={{ 
+      backgroundColor: colors.blackNeutral[600], 
+      borderRadius: '8px', 
+      height: '100%', // make card fill Grid height
+      display: 'flex',
+      flexDirection: 'column',  // so CardContent behaves normally
+    }}>
+            <CardContent sx={{ flexGrow: 1 }}>
               <Typography variant="h6" fontWeight="bold" mb={2}>
                 Quick Actions
               </Typography>
@@ -334,9 +346,15 @@ const Overview = () => {
           </Card>
         </Grid>
         
-        <Grid item xs={12} md={4}>
-          <Card sx={{ backgroundColor: colors.blackNeutral[600], borderRadius: '8px' }}>
-            <CardContent>
+        <Grid size={{ xs: 12, md: 4 }}>
+             <Card sx={{ 
+      backgroundColor: colors.blackNeutral[600], 
+      borderRadius: '8px', 
+      height: '100%', // make card fill Grid height
+      display: 'flex',
+      flexDirection: 'column',  // so CardContent behaves normally
+    }}>
+          <CardContent sx={{ flexGrow: 1 }}>
               <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                 <Typography variant="h6" fontWeight="bold">
                   Recent Activity
@@ -370,7 +388,7 @@ const Overview = () => {
           </Card>
         </Grid>
         
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <Card sx={{ backgroundColor: colors.blackNeutral[600], borderRadius: '8px' }}>
             <CardContent>
               <Typography variant="h6" fontWeight="bold" mb={2}>
@@ -441,6 +459,7 @@ const Overview = () => {
           </Card>
         </Grid>
       </Grid>
+
     </Box>
   );
 };

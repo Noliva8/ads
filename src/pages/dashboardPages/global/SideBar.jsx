@@ -315,15 +315,15 @@ export default function SideBar() {
       </Typography>
     )}
     <Item
-      title={!isCollapsed ? "Upload Audio" : ""}
-      to="/dashboard/upload/audio"
+      title={!isCollapsed ? "Create Audio Ad" : ""}
+      to="/dashboard/CreateAudioAd"
       icon={<AudiotrackOutlinedIcon sx={{ fontSize: '1.4rem' }} />}
       selected={selected}
       setSelected={setSelected}
     />
     <Item
       title={!isCollapsed ? "Upload Overlay" : ""}
-      to="/dashboard/upload/overlay"
+      to="/dashboard/"
       icon={<LayersOutlinedIcon sx={{ fontSize: '1.4rem' }} />}
       selected={selected}
       setSelected={setSelected}

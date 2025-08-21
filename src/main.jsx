@@ -23,7 +23,10 @@ import Dashboard from "./pages/dashboardPages/dashboard";
 import Overview from "./pages/dashboardPages/overview";
 import Campaigns from "./pages/dashboardPages/Campaigns";
 import Billing from "./pages/dashboardPages/Billing";
-import UploadAd from "./pages/dashboardPages/UploadAd";
+import OverlayAdUpload from "./pages/dashboardPages/overlayAdUpload";
+import AdPymentSuccess from "./pages/dashboardPages/adPaymentSucees";
+
+import CreateAd from "./pages/dashboardPages/createAd";
 import Settings from "./pages/dashboardPages/Settings";
 import NotFound from "./pages/dashboardPages/NotFound";
 import VerifyPhone from "./pages/adsAuth/VerifyPhone";
@@ -64,31 +67,6 @@ const LazySupport = React.lazy(() => import("./pages/public/Support"));
 
 
 
-
-
-// const theme = createTheme({
-//   palette: {
-//     mode: 'dark',
-//     primary: {
-//       main: '#441a49',
-//     },
-//     secondary: {
-//       main: '#1a5d5d',
-//     },
-//     background: {
-//       default: '#121212',
-//       paper: '#1e1e1e',
-//     },
-//     text: {
-//       primary: 'rgba(255, 255, 255, 0.92)',
-//       secondary: 'rgba(255, 255, 255, 0.7)',
-//     },
-//   },
-//   typography: {
-//     fontFamily: 'Roboto, sans-serif',
-//     fontSize: 16,
-//   },
-// });
 
 
 
@@ -180,7 +158,12 @@ const router = createBrowserRouter([
           { index: true, element: <Overview /> },
           { path: "campaigns", element: <Campaigns /> },
           { path: "billing", element: <Billing /> },
-          { path: "upload", element: <UploadAd /> },
+         
+          { path: "CreateAudioAd", element: <CreateAd /> },
+          
+          { path: "upload/overlay", element: <OverlayAdUpload /> },
+
+
           { path: "settings", element: <Settings /> },
           {
   path: "analytics",
@@ -198,10 +181,24 @@ const router = createBrowserRouter([
 
 
         ],
+
+
       },
-      
+
+
+      {
+  path: "adPayment/success",
+  element: (
+    <ProtectedAdvertizerRoute>
+      <AdPymentSuccess />
+    </ProtectedAdvertizerRoute>
+  ),
+}
+
     ],
   },
+
+
 
   // ✅ Admin remains outside
   {
@@ -217,6 +214,8 @@ const router = createBrowserRouter([
       { path: "settings", element: <AdminSettings /> },
     ],
   },
+
+  
 
   // 🔥 Catch-all 404
   {

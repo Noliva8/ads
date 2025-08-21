@@ -9,6 +9,8 @@ import Footer from './components/Layout/Footer';
 import Sidebar from './components/Layout/Sidebar';
 import LoadingSpinner from './components/ui/LoadingSpinner.jsx';
 import ToastNotifications from './components/ui/ToastNotifications.jsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // main content
 import AppBar from './pages/dashboardPages/global/AppBar.jsx';
@@ -26,6 +28,8 @@ import SideBar from './pages/dashboardPages/global/SideBar.jsx';
 
 const App = () => {
 
+  
+
   const [theme, colorMode] = useMode();
  
   const location = useLocation();
@@ -38,6 +42,11 @@ const App = () => {
     const checkAuth = () => {
       const loggedIn = advertizerAuth.isAdvertizer();
       const prof = advertizerAuth.getProfile();
+      console.log('check the token in app for advertizer:', prof);
+      
+      const role = advertizerAuth.getRole();
+       console.log('check the role in app for advertizer token:', role);
+
       setIsLoggedIn(loggedIn);
       setProfile(prof);
 
@@ -53,7 +62,9 @@ const App = () => {
     '/ad-account-login',
     '/ad-account-signup',
     '/verify-email',
-    '/verify-phone'
+    '/verify-phone',
+    '/adPayment/success'
+
   ];
   const hideLayout = authPages.includes(location.pathname);
 
@@ -63,6 +74,18 @@ const App = () => {
        <ThemeProvider theme={theme}>
        <CssBaseline />
        
+         <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
 
     <div className={`app-container ${hideLayout ? 'hide-layout' : ''}`}>
 

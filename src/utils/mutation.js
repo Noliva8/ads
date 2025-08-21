@@ -1,7 +1,4 @@
-
-import { gql } from '@apollo/client';
-
-
+import { gql } from "@apollo/client";
 
 export const CREATE_ADVERTIZER = gql`
   mutation Mutation(
@@ -41,30 +38,120 @@ export const CREATE_ADVERTIZER = gql`
   }
 `;
 
-
 export const RESEND_ADVERTIZER_EMAIL_TOKEN = gql`
-mutation resendAdvertizerVerificationEmail($businessEmail: ID!) {
-  resendAdvertizerVerificationEmail(businessEmail: $businessEmail) {
-    message
-    success
-  }
-}
-`
-
-
-export const ADVERTIZER_LOGIN = gql`
-mutation loginAdvertizer($businessEmail: String!, $password: String!) {
-  loginAdvertizer(businessEmail: $businessEmail, password: $password) {
-    advertizerToken
-    advertizer {
-      _id
-      businessEmail
-      isConfirmed
-      isPhoneConfirmed
-      role
-      companyWebsite
+  mutation resendAdvertizerVerificationEmail($businessEmail: ID!) {
+    resendAdvertizerVerificationEmail(businessEmail: $businessEmail) {
+      message
+      success
     }
   }
-}
+`;
 
+export const ADVERTIZER_LOGIN = gql`
+  mutation loginAdvertizer($businessEmail: String!, $password: String!) {
+    loginAdvertizer(businessEmail: $businessEmail, password: $password) {
+      advertizerToken
+      advertizer {
+        _id
+        businessEmail
+        isConfirmed
+        isPhoneConfirmed
+        role
+        companyWebsite
+      }
+    }
+  }
+`;
+
+export const CREATE_AD = gql`
+  mutation CreateAdBasic($advertiserId: ID!, $input: CreateAdBasicInput!) {
+    createAdBasic(advertiserId: $advertiserId, input: $input) {
+      ad {
+        adTitle
+        adType
+        campaignId
+        schedule {
+          endDate
+          startDate
+        }
+        id # Include adId (the unique identifier for the ad)
+        advertiserId # Include advertiserId for reference
+      }
+      quote {
+        basis
+        cityPopulation
+        currency
+        days
+        isMajorCity
+        perDay
+        totalPrice
+        location {
+          name
+          type
+          country
+          city
+          state
+        }
+        marketSize
+      }
+    }
+  }
+`;
+
+export const CONFIRM_PRICE = gql`
+  mutation ConfirmPrice(
+    $adId: ID!
+    $isCostConfirmed: Boolean!
+    $adTitle: String!
+    $campaignId: String!
+    $duration: Int
+    $amount: Float
+    $currency: String!
+    $location: String!
+    $adType: String
+  ) {
+    confirmPrice(
+      adId: $adId
+      isCostConfirmed: $isCostConfirmed
+      adTitle: $adTitle
+      campaignId: $campaignId
+      duration: $duration
+      amount: $amount
+      adType: $adType
+      currency: $currency
+      location: $location
+    ) {
+      id
+      clientSecret
+      isCostConfirmed
+      amount
+      currency
+      location
+      adId
+      adType
+      campaignId
+    }
+  }
+`;
+
+export const AUDIO_AD_UPLOAD = gql`
+  mutation audioAdUpload($adId: ID!, $file: Upload!) {
+    audioAdUpload(adId: $adId, file: $file) {
+      id
+      status
+      streamingAudioAdUrl
+      streamingFallBackAudioUrl
+      masterAudionAdUrl
+    }
+  }
+`;
+
+
+export const AD_ARTWORK_UPLOAD =gql`
+mutation uploadArtwork($adId: ID!, $file: Upload!) {
+  uploadArtwork(adId: $adId, file: $file) {
+    adArtWorkUrl
+    id
+  }
+}
 `
