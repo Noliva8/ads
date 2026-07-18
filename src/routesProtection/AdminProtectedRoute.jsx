@@ -10,7 +10,11 @@ const AdminProtectedRoute = ({ children }) => {
     return <Navigate to="/ad-account-login" />;
   }
 
-  if (profile?.role !== 'admin') {
+  if (advertizerAuth.isSuperAdminDashboard(profile)) {
+    return <Navigate to="/super-admin" replace />;
+  }
+
+  if (!advertizerAuth.isAdminDashboard(profile)) {
     return <Navigate to="/not-authorized" />; // or redirect elsewhere
   }
 

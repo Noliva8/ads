@@ -6,12 +6,14 @@ export const isLoggedInVar = makeVar(advertizerAuth.isAdvertizer());
 
 // ✅ Reactive var for user profile
 const profile = advertizerAuth.getProfile();
+const profileData = advertizerAuth.getProfileData(profile);
 export const userDataVar = makeVar(profile ? {
-  id: profile.sub || profile.id || profile._id || '',
-  name: profile.fullName || profile.name || '',
-  email: profile.businessEmail || profile.email || '',
-  role: profile.role || 'advertizer',
-  avatar: profile.picture || profile.avatar || ''
+  id: profileData.sub || profileData.id || profileData._id || '',
+  name: profileData.fullName || profileData.name || '',
+  email: profileData.businessEmail || profileData.email || '',
+  role: profileData.role || 'advertizer',
+  isSuperAdmin: profileData.isSuperAdmin || false,
+  avatar: profileData.picture || profileData.avatar || ''
 } : null);
 
 // ✅ Apollo cache setup

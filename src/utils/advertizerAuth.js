@@ -21,16 +21,63 @@ class AdvertizerAuth {
     }
   }
 
+  getProfileData(profile = this.getProfile()) {
+    return profile?.data || profile || null;
+  }
+
   // Get user role from token
   getRole() {
-    const profile = this.getProfile();
-    return profile?.role || null;
+    const profileData = this.getProfileData();
+    return profileData?.role || null;
   }
 
   // Check if user has specific role
   hasRole(requiredRole) {
     const role = this.getRole();
     return role === requiredRole;
+  }
+
+  isOwnerDashboard(profile = this.getProfile()) {
+    const profileData = this.getProfileData(profile);
+    return Boolean(
+      profile?.isOwnerDashbord ||
+      profile?.isOwnerDashboard ||
+      profileData?.isOwnerDashbord ||
+      profileData?.isOwnerDashboard ||
+      (profileData?.role === "owner" && profileData?.isSuperAdmin === true)
+    );
+  }
+
+  isSuperAdminDashboard(profile = this.getProfile()) {
+    const profileData = this.getProfileData(profile);
+    return Boolean(
+      profile?.isSuperAdminDashbord ||
+      profile?.isSuperAdminDashboard ||
+      profileData?.isSuperAdminDashbord ||
+      profileData?.isSuperAdminDashboard ||
+      (profileData?.role === "admin" && profileData?.isSuperAdmin === true)
+    );
+  }
+
+  isAdminDashboard(profile = this.getProfile()) {
+    const profileData = this.getProfileData(profile);
+    return profileData?.role === "admin" && profileData?.isSuperAdmin !== true;
+  }
+
+  getDashboardPath(profile = this.getProfile()) {
+    if (this.isOwnerDashboard(profile)) {
+      return "/owner";
+    }
+
+    if (this.isSuperAdminDashboard(profile)) {
+      return "/super-admin";
+    }
+
+    if (this.isAdminDashboard(profile)) {
+      return "/admin";
+    }
+
+    return "/dashboard";
   }
 
   // Check if user is authenticated as advertiser
@@ -85,7 +132,7 @@ class AdvertizerAuth {
       this._onLogin(profile);
     }
 
-    window.location.assign("/dashboard");
+    window.location.assign(this.getDashboardPath(profile));
   }
 
   // Handle logout - notify app and redirect
