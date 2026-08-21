@@ -6,6 +6,7 @@ import {
 } from '@mui/material';
 import { Upload as UploadIcon, Image, Close, CheckCircle } from '@mui/icons-material';
 import { tokens } from '../../../theme';
+import { brand, brandCardSx, brandOutlinedButtonSx, brandPanelSx, brandPrimaryButtonSx } from '../../../brand';
 
 const OverlayAdUpload = () => {
   const theme = useTheme();
@@ -37,8 +38,7 @@ const OverlayAdUpload = () => {
         {/* Upload Section */}
         <Grid xs={12} md={6}>
           <Card sx={{ 
-            backgroundColor: colors.blackNeutral[600],
-            borderRadius: '8px',
+            ...brandCardSx,
             height: '100%'
           }}>
             <CardContent>
@@ -48,8 +48,8 @@ const OverlayAdUpload = () => {
               
               <Box
                 sx={{
-                  border: `2px dashed ${colors.graySoft[500]}`,
-                  borderRadius: '8px',
+                  ...brandPanelSx,
+                  border: `2px dashed ${brand.colors.cardBorder}`,
                   p: 4,
                   textAlign: 'center',
                   mb: 2,
@@ -58,7 +58,7 @@ const OverlayAdUpload = () => {
               >
                 {file ? (
                   <Box>
-                    <Image sx={{ fontSize: 48, color: colors.orange[500] }} />
+                    <Image sx={{ fontSize: 48, color: brand.colors.accent }} />
                     <Typography mt={1}>{file.name}</Typography>
                     <Typography variant="body2" color={colors.graySoft[400]} mt={1}>
                       {(file.size / (1024 * 1024)).toFixed(2)} MB
@@ -77,7 +77,7 @@ const OverlayAdUpload = () => {
                       variant="outlined" 
                       startIcon={<Close />}
                       onClick={() => setFile(null)}
-                      sx={{ mt: 2 }}
+                      sx={{ ...brandOutlinedButtonSx, mt: 2 }}
                     >
                       Remove
                     </Button>
@@ -92,11 +92,7 @@ const OverlayAdUpload = () => {
                     <Button
                       variant="contained"
                       component="label"
-                      sx={{ 
-                        mt: 2,
-                        backgroundColor: colors.orange[500],
-                        '&:hover': { backgroundColor: colors.orange[600] }
-                      }}
+                      sx={{ ...brandPrimaryButtonSx, mt: 2 }}
                     >
                       Select File
                       <input 
@@ -119,7 +115,7 @@ const OverlayAdUpload = () => {
 
         {/* Form Section */}
         <Grid xs={12} md={6}>
-          <Card sx={{ backgroundColor: colors.blackNeutral[600], borderRadius: '8px' }}>
+          <Card sx={brandCardSx}>
             <CardContent>
               <Typography variant="h6" fontWeight="bold" mb={2}>
                 Ad Details
@@ -135,7 +131,9 @@ const OverlayAdUpload = () => {
                   onChange={(e) => setFormData({...formData, title: e.target.value})}
                   sx={{ 
                     '& .MuiOutlinedInput-root': {
-                      '& fieldset': { borderColor: colors.graySoft[500] },
+                      ...brandPanelSx,
+                      '& fieldset': { borderColor: brand.colors.cardBorder },
+                      '&.Mui-focused fieldset': { borderColor: brand.colors.accent },
                     }
                   }}
                 />
@@ -182,7 +180,7 @@ const OverlayAdUpload = () => {
                   </Grid>
                 </Grid>
 
-                <Divider sx={{ my: 3, borderColor: colors.blackNeutral[500] }} />
+                <Divider sx={{ my: 3, borderColor: brand.colors.cardBorder }} />
 
                 <Button
                   fullWidth
@@ -190,10 +188,9 @@ const OverlayAdUpload = () => {
                   type="submit"
                   disabled={!file}
                   startIcon={<CheckCircle />}
-                  sx={{ 
+                  sx={{
+                    ...brandPrimaryButtonSx,
                     py: 1.5,
-                    backgroundColor: colors.orange[500],
-                    '&:hover': { backgroundColor: colors.orange[600] },
                     '&:disabled': { backgroundColor: colors.graySoft[700] }
                   }}
                 >

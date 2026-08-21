@@ -1,21 +1,20 @@
 import { NavLink, Outlet } from "react-router-dom";
+import AppBar from "../../pages/dashboardPages/global/AppBar";
+import SideBar from "../../pages/dashboardPages/global/SideBar";
 
 export default function SuperAdminLayout() {
     return (
-        <div>
-            <header>
-                <h1>Super Admin Dashboard</h1>
-                <nav>
-                    <NavLink to="/super-admin" end>Overview</NavLink>{" | "}
-                    <NavLink to="/super-admin/manage-adverts">Adverts</NavLink>{" | "}
-                    <NavLink to="/super-admin/manage-songs">Songs</NavLink>{" | "}
-                    <NavLink to="/super-admin/metadata">Metadata</NavLink>{" | "}
-                    <NavLink to="/super-admin/settings">Settings</NavLink>
-                </nav>
-            </header>
-            <main>
+        <div className="dashboard-container">
+
+           <SideBar />
+
+           
+            
+            <main className="dashboard-main-content">
+ <AppBar />
                 <Outlet />
             </main>
+            
         </div>
     );
 }

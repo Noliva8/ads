@@ -18,6 +18,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from "@mui/material/styles";
 import { tokens } from "../../../../theme";
 import { useState, useCallback, useRef } from "react";
+import { brand, brandCardSx, brandOutlinedButtonSx, brandPanelSx, brandPrimaryButtonSx } from "../../../../brand";
 
 export default function AdBannerUpload() {
   const theme = useTheme();
@@ -80,12 +81,9 @@ export default function AdBannerUpload() {
     <Box sx={{ width: '100%' }}>
       <Card
         sx={{
-          p: 3,
+          ...brandCardSx,
           width: '100%',
           minHeight: 560, // gives presence; adjust as you like
-          backgroundColor: colors.blackNeutral[600],
-          borderRadius: '12px',
-          boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
           transition: 'all 0.3s ease'
         }}
       >
@@ -110,15 +108,15 @@ export default function AdBannerUpload() {
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             sx={{
-              border: `2px dashed ${isDragging ? colors.orangeAccent[400] : colors.orangeAccent[200]}`,
-              borderRadius: '12px',
+              ...brandPanelSx,
+              border: `2px dashed ${isDragging ? brand.colors.accent : brand.colors.cardBorder}`,
               p: 4,
               mb: 2,
               textAlign: 'center',
-              backgroundColor: isDragging ? 'rgba(255,152,0,0.05)' : 'transparent',
+              backgroundColor: isDragging ? brand.colors.accentSoft : 'transparent',
               transition: 'all 0.3s ease',
               cursor: 'pointer',
-              '&:hover': { borderColor: colors.orangeAccent[400] }
+              '&:hover': { borderColor: brand.colors.accent }
             }}
           >
             <input
@@ -129,7 +127,7 @@ export default function AdBannerUpload() {
               onChange={handleFileChange}
             />
             <CloudUploadIcon
-              sx={{ fontSize: 48, color: colors.orangeAccent[400], mb: 2 }}
+              sx={{ fontSize: 48, color: brand.colors.accent, mb: 2 }}
             />
 
             <Typography variant="h6" sx={{ color: colors.graySoft[100], mb: 1 }}>
@@ -148,10 +146,7 @@ export default function AdBannerUpload() {
                 inputRef.current?.click();
               }}
               startIcon={<FileUpload />}
-              sx={{
-                backgroundColor: colors.orangeAccent[500],
-                '&:hover': { backgroundColor: colors.orangeAccent[600] }
-              }}
+              sx={brandPrimaryButtonSx}
             >
               Select File
             </Button>
@@ -162,10 +157,9 @@ export default function AdBannerUpload() {
           {file && (
             <Box
               sx={{
+                ...brandPanelSx,
                 mt: 3,
                 p: 2,
-                backgroundColor: colors.blackNeutral[500],
-                borderRadius: '8px',
                 position: 'relative'
               }}
             >
@@ -179,7 +173,7 @@ export default function AdBannerUpload() {
 
 
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <ImageIcon sx={{ color: colors.orangeAccent[400], mr: 2, fontSize: 40 }} />
+                <ImageIcon sx={{ color: brand.colors.accent, mr: 2, fontSize: 40 }} />
                 <Box>
                   <Typography variant="subtitle1" sx={{ color: colors.graySoft[100] }}>
                     {file.name}
@@ -201,8 +195,8 @@ export default function AdBannerUpload() {
                 sx={{
                   height: 6,
                   borderRadius: 3,
-                  backgroundColor: colors.blackNeutral[400],
-                  '& .MuiLinearProgress-bar': { backgroundColor: colors.orangeAccent[400] }
+                  backgroundColor: brand.colors.cardBorder,
+                  '& .MuiLinearProgress-bar': { backgroundColor: brand.colors.accent }
                 }}
               />
 
@@ -229,12 +223,12 @@ export default function AdBannerUpload() {
             <Chip
               label="Supported: JPEG, PNG"
               variant="outlined"
-              sx={{ color: colors.graySoft[300], borderColor: colors.graySoft[700] }}
+              sx={{ color: colors.graySoft[300], borderColor: brand.colors.cardBorder }}
             />
             <Chip
               label="Max size: 25MB"
               variant="outlined"
-              sx={{ color: colors.graySoft[300], borderColor: colors.graySoft[700] }}
+              sx={{ color: colors.graySoft[300], borderColor: brand.colors.cardBorder }}
             />
           </Box>
 
@@ -246,14 +240,14 @@ export default function AdBannerUpload() {
               alignItems: 'center',
               mt: 4,
               pt: 2,
-              borderTop: `1px solid ${colors.blackNeutral[400]}`
+              borderTop: `1px solid ${brand.colors.cardBorder}`
             }}
           >
             <Button
               startIcon={<HelpCenterIcon />}
               sx={{
                 color: colors.graySoft[300],
-                '&:hover': { color: colors.orangeAccent[400] }
+                '&:hover': { color: brand.colors.accent }
               }}
             >
               Help Center
@@ -263,9 +257,7 @@ export default function AdBannerUpload() {
                 variant="outlined"
                 onClick={removeFile}
                 sx={{
-                  color: colors.graySoft[100],
-                  borderColor: colors.graySoft[500],
-                  '&:hover': { borderColor: colors.graySoft[400] }
+                  ...brandOutlinedButtonSx,
                 }}
               >
                 Cancel
@@ -274,8 +266,7 @@ export default function AdBannerUpload() {
                 variant="contained"
                 disabled={!file || uploadProgress < 100}
                 sx={{
-                  backgroundColor: colors.orangeAccent[500],
-                  '&:hover': { backgroundColor: colors.orangeAccent[600] },
+                  ...brandPrimaryButtonSx,
                   '&:disabled': {
                     backgroundColor: colors.graySoft[700],
                     color: colors.graySoft[500]

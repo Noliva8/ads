@@ -1,5 +1,6 @@
 import { createContext, useState, useMemo } from "react";
 import { createTheme } from "@mui/material/styles";
+import { brand } from "./brand";
 
 
 
@@ -9,6 +10,19 @@ import { createTheme } from "@mui/material/styles";
 export const tokens = (mode) => ({
     ...(mode === 'dark')?
     {
+white: {
+  100: "#ffffff",
+  200: "#f5f5f5",
+  300: "#e5e5e5",
+  400: "#d4d4d4",
+  500: "#c4c4c4",
+  600: "#a3a3a3",
+  700: "#737373",
+  800: "#525252",
+  900: "#404040"
+},
+whiteSoft: "#f5f5f5",
+whiteMuted: "#d4d4d4",
         blackAccent: {
     100: "#d0d0d0",
     200: "#a0a0a0",
@@ -43,27 +57,27 @@ graySoft: {
     900: "#070707"
 },
 orangeAccent: {
-    100: "#ffe5da",
-    200: "#ffcbb5",
-    300: "#ffb18f",
-    400: "#ff976a",
-    500: "#ff7d45",
-    600: "#cc6437",
-    700: "#994b29",
-    800: "#66321c",
-    900: "#33190e"
+    100: "#fff9da",
+    200: "#fff1b5",
+    300: "#fde687",
+    400: brand.colors.accentHover,
+    500: brand.colors.accent,
+    600: "#b69d1a",
+    700: "#887614",
+    800: "#5b4e0d",
+    900: "#2d2707"
 },
 
 orange: {
-    100: "#fbe7d2",
-    200: "#f8cfa6",
-    300: "#f4b879",
-    400: "#f1a04d",
-    500: "#ed8820",
-    600: "#be6d1a",
-    700: "#8e5213",
-    800: "#5f360d",
-    900: "#2f1b06"
+    100: "#fff9da",
+    200: "#fff1b5",
+    300: "#fde687",
+    400: brand.colors.accentHover,
+    500: brand.colors.accent,
+    600: "#b69d1a",
+    700: "#887614",
+    800: "#5b4e0d",
+    900: "#2d2707"
 },
 redAccent: {
     100: "#fae1d7",
@@ -94,6 +108,19 @@ greenAccent: {
         // light mode in future if needed
         // =============================
 
+  white: {
+    100: "#ffffff",
+    200: "#f5f5f5",
+    300: "#e5e5e5",
+    400: "#d4d4d4",
+    500: "#c4c4c4",
+    600: "#a3a3a3",
+    700: "#737373",
+    800: "#525252",
+    900: "#404040"
+  },
+  whiteSoft: "#f5f5f5",
+  whiteMuted: "#d4d4d4",
         blackAccent: {
     100: "#040404",
     200: "#070707",
@@ -128,27 +155,27 @@ graySoft: {
     900: "#d3d3d3",
 },
 orangeAccent: {
-    100: "#33190e",
-    200: "#66321c",
-    300: "#994b29",
-    400: "#cc6437",
-    500: "#ff7d45",
-    600: "#ff976a",
-    700: "#ffb18f",
-    800: "#ffcbb5",
-    900: "#ffe5da",
+    100: "#2d2707",
+    200: "#5b4e0d",
+    300: "#887614",
+    400: "#b69d1a",
+    500: brand.colors.accent,
+    600: brand.colors.accentHover,
+    700: "#fde687",
+    800: "#fff1b5",
+    900: "#fff9da",
 },
 
 orange: {
-    100: "#fbe7d2",
-    200: "#f8cfa6",
-    300: "#f4b879",
-    400: "#f1a04d",
-    500: "#ed8820",
-    600: "#be6d1a",
-    700: "#8e5213",
-    800: "#5f360d",
-    900: "#2f1b06"
+    100: "#2d2707",
+    200: "#5b4e0d",
+    300: "#887614",
+    400: "#b69d1a",
+    500: brand.colors.accent,
+    600: brand.colors.accentHover,
+    700: "#fde687",
+    800: "#fff1b5",
+    900: "#fff9da"
 },
 
 redAccent: {
@@ -200,17 +227,17 @@ export const themeSettings = (mode) => {
               light: colors.graySoft[100],
             },
             background: {
-              default: colors.blackAccent[500],
-              paper: colors.blackNeutral[500],
+              default: brand.colors.background,
+              paper: brand.colors.surface,
             },
             text: {
-              primary: colors.graySoft[900],
-              secondary: colors.graySoft[600],
+              primary: brand.colors.textPrimary,
+              secondary: brand.colors.textSecondary,
             },
           }
         : {
             primary: {
-              main: colors.orangeAccent[500],
+              main: brand.colors.accent,
             },
             secondary: {
               main: colors.redAccent[500],
@@ -234,39 +261,70 @@ export const themeSettings = (mode) => {
     // typography
 
     typography: {
-        fontFamily: ['-apple-system', 'BlinkMacSystemFont', 'sans-serif'].join(','),
-        fontSize: 14,
+        fontFamily: brand.typography.fontFamily,
+        fontSize: brand.typography.baseSize,
         h1: {
-             fontFamily: ['-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+             fontFamily: brand.typography.fontFamily,
              fontSize: 40
 
         },
           h2: {
-             fontFamily: ['-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+             fontFamily: brand.typography.fontFamily,
              fontSize: 32
 
         },
           h3: {
-             fontFamily: ['-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+             fontFamily: brand.typography.fontFamily,
              fontSize: 24
 
         },
           h4: {
-             fontFamily: ['-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+             fontFamily: brand.typography.fontFamily,
              fontSize: 20
 
         },
           h5: {
-             fontFamily: ['-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+             fontFamily: brand.typography.fontFamily,
              fontSize: 16
 
         },
           h6: {
-             fontFamily: ['-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+             fontFamily: brand.typography.fontFamily,
              fontSize: 14
 
         },
-    }
+    },
+    components: {
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            backgroundColor: brand.colors.cardSurface,
+            backgroundImage: "none",
+            borderRadius: brand.radius.lg,
+            border: `1px solid ${brand.colors.cardBorder}`,
+            boxShadow: "none",
+            backdropFilter: "blur(10px)",
+            transition: "transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease",
+            "&:hover": {
+              transform: "translateY(-10px)",
+              backgroundColor: brand.colors.cardSurfaceHover,
+              backgroundImage: "none",
+              boxShadow: brand.shadow.cardHover,
+            },
+          },
+        },
+      },
+      MuiCardContent: {
+        styleOverrides: {
+          root: {
+            padding: brand.spacing.cardPadding,
+            "&:last-child": {
+              paddingBottom: brand.spacing.cardPadding,
+            },
+          },
+        },
+      },
+    },
   };
 };
 
@@ -294,4 +352,3 @@ export const useMode = () => {
 const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 return [theme, colorMode];
 }
-

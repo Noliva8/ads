@@ -70,7 +70,7 @@ const AdAccountLogin = () => {
 
   return (
     <div className="auth-container">
-      <div className="auth-card">
+      <div className="auth-card auth-card--login">
         <div className="auth-header">
           <h2>Business Account Login</h2>
           <p>Access your advertising dashboard</p>

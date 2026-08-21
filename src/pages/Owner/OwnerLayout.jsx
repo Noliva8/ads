@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import "../dashboardPages/dashboard/dashboard.css";
 
 // Owner Dashboard components
 import AppBar from "../../pages/dashboardPages/global/AppBar";

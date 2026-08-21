@@ -8,6 +8,7 @@ import {
   FiSettings 
 } from 'react-icons/fi';
 import { Drawer, useMediaQuery } from '@mui/material';
+import { brand } from '../../brand';
 
 const Sidebar = ({ isMobile, mobileOpen, handleDrawerToggle }) => {
   const navItems = [
@@ -36,7 +37,7 @@ const Sidebar = ({ isMobile, mobileOpen, handleDrawerToggle }) => {
       }}
     >
       <div className="sidebar-brand">
-        <h2>AfroFeel Ads</h2>
+        <h2>{brand.productName}</h2>
       </div>
       <nav className="sidebar-nav">
         {navItems.map((item) => (

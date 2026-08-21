@@ -1,16 +1,16 @@
 /* ===== Base Styles ===== */
 .creative-lab {
-  --primary: #6E00FF;
-  --secondary: #FF00A8;
-  --accent: #E4C421;
-  --dark: #0F0F0F;
-  --light: #FFFFFF;
-  --gray: rgba(255, 255, 255, 0.7);
-  --card-bg: rgba(255, 255, 255, 0.1);
+  --primary: var(--brand-campaign-primary);
+  --secondary: var(--brand-campaign-secondary);
+  --accent: var(--brand-accent);
+  --dark: var(--brand-dark);
+  --light: var(--brand-light);
+  --gray: var(--brand-text-secondary);
+  --card-bg: var(--brand-card-bg);
   --section-padding: 5rem 0;
   
   color: var(--light);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--brand-font-family);
   line-height: 1.6;
 }
 
@@ -59,7 +59,7 @@ p {
 .btn {
   display: inline-block;
   padding: 1rem 2rem;
-  border-radius: 50px;
+  border-radius: var(--brand-radius-pill);
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -68,13 +68,13 @@ p {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), #F8D347);
+  background: var(--brand-gradient-accent);
   color: var(--dark);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(228, 196, 33, 0.3);
+  box-shadow: var(--brand-shadow-accent);
 }
 
 .btn-secondary {
@@ -84,7 +84,7 @@ p {
 }
 
 .btn-secondary:hover {
-  background: rgba(228, 196, 33, 0.1);
+  background: var(--brand-accent-soft);
 }
 
 .btn-small {
@@ -148,13 +148,13 @@ p {
   color: var(--gray);
   font-weight: 600;
   cursor: pointer;
-  border-radius: 50px;
+  border-radius: var(--brand-radius-pill);
   transition: all 0.3s;
   font-size: 1.1rem;
 }
 
 .tab-button.active {
-  background: rgba(228, 196, 33, 0.2);
+  background: var(--brand-accent-soft);
   color: var(--accent);
   border: 1px solid var(--accent);
 }
@@ -178,16 +178,17 @@ p {
 
 .format-card, .insight-card, .resource-card {
   background: var(--card-bg);
-  border-radius: 16px;
-  padding: 2rem;
-  transition: transform 0.3s ease;
+  border-radius: var(--brand-radius-lg);
+  padding: var(--brand-card-padding);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--brand-card-border);
 }
 
 .format-card:hover, .insight-card:hover, .resource-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(-10px);
+  background: var(--brand-card-bg-hover);
+  box-shadow: var(--brand-shadow-card-hover);
 }
 
 /* Format Cards */
@@ -209,9 +210,9 @@ p {
 
 .performance-badge {
   display: inline-block;
-  background: rgba(110, 0, 255, 0.2);
+  background: var(--brand-card-icon-bg);
   padding: 0.5rem 1rem;
-  border-radius: 50px;
+  border-radius: var(--brand-radius-pill);
   margin: 1rem 0;
   font-weight: 600;
   color: var(--accent);
@@ -260,9 +261,10 @@ p {
 /* ===== Script Builder ===== */
 .script-builder-section {
   padding: var(--section-padding);
-  background: rgba(110, 0, 255, 0.05);
+  background: var(--brand-card-bg);
   margin: 4rem 0;
-  border-radius: 16px;
+  border-radius: var(--brand-radius-lg);
+  border: 1px solid var(--brand-card-border);
 }
 
 .script-builder {
@@ -275,8 +277,9 @@ p {
 .builder-controls {
   background: var(--card-bg);
   padding: 2.5rem;
-  border-radius: 16px;
+  border-radius: var(--brand-radius-lg);
   backdrop-filter: blur(10px);
+  border: 1px solid var(--brand-card-border);
 }
 
 .form-group {
@@ -292,10 +295,10 @@ p {
 .form-input {
   width: 100%;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  color: white;
+  background: var(--brand-card-bg);
+  border: 1px solid var(--brand-border-strong);
+  border-radius: var(--brand-radius-md);
+  color: var(--brand-light);
   font-size: 1rem;
 }
 
@@ -306,17 +309,17 @@ p {
 .script-preview {
   background: rgba(0, 0, 0, 0.3);
   padding: 2.5rem;
-  border-radius: 16px;
+  border-radius: var(--brand-radius-lg);
   border-left: 4px solid var(--accent);
 }
 
 .preview-output {
   background: rgba(0, 0, 0, 0.5);
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: var(--brand-radius-md);
   min-height: 200px;
   margin-top: 1.5rem;
-  font-family: 'Courier New', monospace;
+  font-family: var(--brand-font-mono);
   white-space: pre-wrap;
   font-size: 1.1rem;
   line-height: 1.8;

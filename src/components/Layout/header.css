@@ -1,14 +1,14 @@
 /* Variables */
 :root {
-  --af-primary: #441a49;
-  --af-secondary: #1a5d5d;
-  --af-gold: #E4C421;
-  --af-gold-hover: #F8D347;
-  --af-dark: #0F0F0F;
-  --af-light: #FFFFFF;
-  --af-gray: #6B7280;
-  --af-border: rgba(255,255,255,0.1);
-  --af-transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --af-primary: var(--brand-primary, #441A49);
+  --af-secondary: var(--brand-secondary, #1A5D5D);
+  --af-gold: var(--brand-accent);
+  --af-gold-hover: var(--brand-accent-hover);
+  --af-dark: var(--brand-dark, #0F0F0F);
+  --af-light: var(--brand-light, #FFFFFF);
+  --af-gray: var(--brand-text-secondary, rgba(255, 255, 255, 0.7));
+  --af-border: var(--brand-border, rgba(255, 255, 255, 0.12));
+  --af-transition: var(--brand-transition, 0.3s cubic-bezier(0.25, 0.8, 0.25, 1));
 }
 
 /* Base Header Styles */

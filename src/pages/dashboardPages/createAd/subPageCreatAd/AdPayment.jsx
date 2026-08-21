@@ -29,6 +29,7 @@ import { Elements, CardElement, useStripe, useElements } from "@stripe/react-str
 
 import { tokens } from "../../../../theme";
 import Checkout from "./AdCheckout";
+import { brand, brandCardSx, brandPanelSx } from "../../../../brand";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -89,18 +90,13 @@ export default function AdPayment({ clientSecret, success, onPaymentSuccess, onC
           columnSpacing={3}
           rowSpacing={2}
           sx={{
-            borderRadius: "16px",
-           
-            boxShadow: theme.shadows[10],
-            backgroundColor: colors.blackNeutral[600],
+            ...brandCardSx,
           }}
         >
           <Grid size={{ xs: 12 }}>
             <Card
               sx={{
-                borderRadius: "16px",
-                boxShadow: theme.shadows[10],
-                backgroundColor: colors.blackNeutral[600],
+                ...brandCardSx,
               }}
             >
               <CardContent>
@@ -116,7 +112,7 @@ export default function AdPayment({ clientSecret, success, onPaymentSuccess, onC
                 <Divider
                   sx={{
                     my: 2,
-                    borderColor: colors.blackNeutral[500],
+                    borderColor: brand.colors.cardBorder,
                     borderBottomWidth: 2,
                   }}
                 />
@@ -131,19 +127,19 @@ export default function AdPayment({ clientSecret, success, onPaymentSuccess, onC
                           onClick={() => handlePayment(method.id)}
                           disabled={loading}
                           sx={{
-                            borderRadius: "12px",
+                            borderRadius: brand.radius.md,
                             height: "64px",
                             backgroundColor: method.color,
                             color: method.textColor,
                             border:
                               method.variant === "outlined"
-                                ? `1px solid ${colors.blackNeutral[400]}`
+                                ? `1px solid ${brand.colors.cardBorder}`
                                 : "none",
                             "&:hover": {
                               backgroundColor:
                                 method.variant === "contained"
                                   ? `${method.color}${theme.palette.mode === "dark" ? "DD" : "CC"}`
-                                  : colors.blackNeutral[500],
+                                  : brand.colors.cardSurface,
                               boxShadow: theme.shadows[4],
                             },
                             transition: "all 0.3s ease",
@@ -186,9 +182,9 @@ export default function AdPayment({ clientSecret, success, onPaymentSuccess, onC
         py: 0.75,
         minWidth: 64,
         borderRadius: 1.5,                 // 12px if default spacing = 8
-        bgcolor: 'rgba(255,255,255,0.06)', // subtle pill
+        ...brandPanelSx,
         border: '1px solid',
-        borderColor: 'divider',            // or a custom color token
+        borderColor: brand.colors.cardBorder,
       }}
     >
       <Box
@@ -232,4 +228,3 @@ export default function AdPayment({ clientSecret, success, onPaymentSuccess, onC
     </Box>
   );
 }
-

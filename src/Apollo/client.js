@@ -6,6 +6,7 @@ import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 // Constants
 const TOKEN_KEY = 'advertizer_id_token';
 const GRAPHQL_URI = import.meta.env.VITE_GRAPHQL_ENDPOINT ?? 'http://localhost:3001/graphql';
+const CLIENT_APP = import.meta.env.VITE_CLIENT_APP ?? 'ads';
 
 // Error Handling
 const errorLink = onError(({ graphQLErrors, networkError }) => {
@@ -24,6 +25,7 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       Authorization: token ? `Bearer ${token}` : '',
+      'x-afrofeel-client-app': CLIENT_APP,
     },
   };
 });

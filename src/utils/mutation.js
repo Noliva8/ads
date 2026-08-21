@@ -155,3 +155,27 @@ mutation uploadArtwork($adId: ID!, $file: Upload!) {
   }
 }
 `
+
+export const START_VISITOR_VISIT = gql`
+  mutation StartVisitorVisit($visitorId: String!) {
+    startVisitorVisit(visitorId: $visitorId) {
+      visitorId
+      visitId
+    }
+  }
+`;
+
+
+export const ATTACH_VISITOR_TO_USER = gql`
+  mutation AttachVisitorToUser(
+    $visitorId: String!
+    $visitId: ID
+    $isNewUser: Boolean!
+  ) {
+    attachVisitorToUser(
+      visitorId: $visitorId
+      visitId: $visitId
+      isNewUser: $isNewUser
+    )
+  }
+`;

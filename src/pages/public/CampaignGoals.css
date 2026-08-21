@@ -4,13 +4,14 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 2rem;
-  color: #ffffff;
+  color: var(--brand-light);
+  font-family: var(--brand-font-family);
 }
 
 /* Hero Section */
 .cg-hero {
-  background: linear-gradient(135deg, #441a49, #1a5d5d);
-  border-radius: 16px;
+  background: var(--brand-gradient-main);
+  border-radius: var(--brand-radius-lg);
   padding: 6rem 2rem;
   text-align: center;
   margin: 4rem 0;
@@ -24,7 +25,7 @@
 }
 
 .cg-hero h1 span {
-  color: #E4C421;
+  color: var(--brand-accent);
 }
 
 .cg-subtitle {
@@ -57,7 +58,7 @@
 
 .cg-section-header p {
   font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--brand-text-secondary);
 }
 
 .cg-goals-grid {
@@ -67,16 +68,18 @@
 }
 
 .cg-goal-card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 2rem;
-  transition: transform 0.3s ease;
+  background: var(--brand-card-bg);
+  border-radius: var(--brand-radius-lg);
+  padding: var(--brand-card-padding);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   backdrop-filter: blur(10px);
+  border: 1px solid var(--brand-card-border);
 }
 
 .cg-goal-card:hover {
   transform: translateY(-10px);
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--brand-card-bg-hover);
+  box-shadow: var(--brand-shadow-card-hover);
 }
 
 .cg-goal-icon {
@@ -105,15 +108,16 @@
 .cg-step {
   text-align: center;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
+  background: var(--brand-card-bg);
+  border-radius: var(--brand-radius-lg);
+  border: 1px solid var(--brand-card-border);
 }
 
 .cg-step-number {
   width: 50px;
   height: 50px;
-  background: #E4C421;
-  color: #0F0F0F;
+  background: var(--brand-accent);
+  color: var(--brand-dark);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -132,8 +136,9 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 3rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
+  background: var(--brand-card-bg);
+  border-radius: var(--brand-radius-lg);
+  border: 1px solid var(--brand-card-border);
   font-style: italic;
   font-size: 1.2rem;
 }
@@ -142,8 +147,8 @@
 .cg-final-cta {
   text-align: center;
   padding: 6rem 0;
-  background: linear-gradient(135deg, #6E00FF, #FF00A8);
-  border-radius: 16px;
+  background: linear-gradient(135deg, var(--brand-campaign-primary), var(--brand-campaign-secondary));
+  border-radius: var(--brand-radius-lg);
   margin: 4rem 0;
 }
 
@@ -154,10 +159,10 @@
 
 /* Button Styles (consistent with GetStarted) */
 .cg-primary-cta {
-  background: linear-gradient(135deg, #E4C421, #F8D347);
-  color: #0F0F0F;
+  background: var(--brand-gradient-accent);
+  color: var(--brand-dark);
   padding: 1rem 2rem;
-  border-radius: 50px;
+  border-radius: var(--brand-radius-pill);
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -165,11 +170,11 @@
 
 .cg-primary-cta:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(228, 196, 33, 0.3);
+  box-shadow: var(--brand-shadow-accent);
 }
 
 .cg-secondary-cta {
-  color: #E4C421;
+  color: var(--brand-accent);
   font-weight: 500;
   text-decoration: none;
   transition: all 0.3s ease;

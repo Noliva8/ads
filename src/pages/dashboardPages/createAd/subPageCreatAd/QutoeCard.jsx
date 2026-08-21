@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
 import Typography from "@mui/material/Typography";
 import { Card, CardContent, useTheme, Divider, Button, CircularProgress } from "@mui/material";
+import { brand, brandCardSx, brandPrimaryButtonSx } from "../../../../brand";
 
 
 
@@ -20,10 +21,10 @@ export default function QuoteCard({colors, quote, loading, handleConfirm, steps}
                   <Card
                     sx={{
 
+                      ...brandCardSx,
                       height: "100%",
                       display: "flex",
                       flexDirection: "column",
-                      backgroundColor: colors.blackNeutral[600],
                     }}
                   >
                     <CardContent sx={{ flexGrow: 1 }}>
@@ -37,7 +38,7 @@ export default function QuoteCard({colors, quote, loading, handleConfirm, steps}
                       </Typography>
 
                       <Divider
-                        sx={{ my: 1, borderColor: colors.blackNeutral[500] }}
+                        sx={{ my: 1, borderColor: brand.colors.cardBorder }}
                       />
 
                       {!quote ? (
@@ -55,13 +56,13 @@ export default function QuoteCard({colors, quote, loading, handleConfirm, steps}
                             </Typography>
                             <Typography color={colors.graySoft[300]}>
                               Location:{" "}
-                              <strong style={{ color: colors.orange[500] }}>
+                              <strong style={{ color: brand.colors.accent }}>
                                 {quote.location?.name || "Not specified"}
                               </strong>
                             </Typography>
                             <Typography color={colors.graySoft[300]}>
                               Market Tier:{" "}
-                              <strong style={{ color: colors.orange[500] }}>
+                              <strong style={{ color: brand.colors.accent }}>
                                 {quote.marketSize === "major"
                                   ? "Major Market"
                                   : quote.marketSize === "minor"
@@ -72,7 +73,7 @@ export default function QuoteCard({colors, quote, loading, handleConfirm, steps}
                             {quote.isMajorCity !== null && (
                               <Typography color={colors.graySoft[300]}>
                                 Major City:{" "}
-                                <strong style={{ color: colors.orange[500] }}>
+                                <strong style={{ color: brand.colors.accent }}>
                                   {quote.isMajorCity ? "Yes" : "No"}
                                 </strong>
                               </Typography>
@@ -88,7 +89,7 @@ export default function QuoteCard({colors, quote, loading, handleConfirm, steps}
                             </Typography>
                             <Typography color={colors.graySoft[300]}>
                               Daily Rate:{" "}
-                              <strong style={{ color: colors.orange[500] }}>
+                              <strong style={{ color: brand.colors.accent }}>
                                 ${quote.perDay?.toFixed(2)}
                               </strong>
                             </Typography>
@@ -100,7 +101,7 @@ export default function QuoteCard({colors, quote, loading, handleConfirm, steps}
                             </Typography>
                             <Typography color={colors.graySoft[300]}>
                               Total Cost:{" "}
-                              <strong style={{ color: colors.orange[500] }}>
+                              <strong style={{ color: brand.colors.accent }}>
                                 ${quote.totalPrice?.toFixed(2)}
                               </strong>
                             </Typography>
@@ -123,18 +124,7 @@ export default function QuoteCard({colors, quote, loading, handleConfirm, steps}
                               fullWidth
                               disabled={loading}
                               
-                              sx={{
-                                backgroundColor:
-                                  colors.greenAccent?.[500] ||
-                                  colors.orange[500],
-                                "&:hover": {
-                                  backgroundColor:
-                                    colors.greenAccent?.[600] ||
-                                    colors.orange[600],
-                                  boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-                                },
-                                transition: "all 0.3s ease",
-                              }}
+                              sx={brandPrimaryButtonSx}
                               onClick={handleConfirm}
 
                             >

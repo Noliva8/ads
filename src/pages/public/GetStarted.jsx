@@ -2,15 +2,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './GetStarted.css';
 import gettingStarted from '../../assets/images/gettingStarted.jpg'
+import { brand } from '../../brand';
+
 const GetStarted = () => {
+
+
   return (
     <div className="gs-container">
+
       {/* Hero Section */}
+
+      
       <section className="gs-hero">
+
+
         <div className="gs-hero-content">
           <h1>Amplify Your Music with <span>Targeted Audio Ads</span></h1>
           <p className="gs-subtitle">
-            Reach millions of African music lovers through AfroFeel's premium audio ad network.
+            Reach millions of African music lovers through {brand.productName}' premium audio ad network.
             <br />Performance-driven campaigns with real-time analytics.
           </p>
           <div className="gs-cta-group">
@@ -30,7 +39,7 @@ const GetStarted = () => {
       {/* Value Proposition */}
       <section className="gs-value-prop">
         <div className="gs-section-header">
-          <h2>Why Advertise on AfroFeel?</h2>
+          <h2>Why Advertise on {brand.companyName}?</h2>
           <p>We combine cultural relevance with cutting-edge targeting</p>
         </div>
         
@@ -98,7 +107,7 @@ const GetStarted = () => {
       {/* Final CTA */}
       <section className="gs-final-cta">
         <h2>Ready to Amplify Your Reach?</h2>
-        <p>Join hundreds of brands growing with AfroFeel Audio Ads</p>
+        <p>Join hundreds of brands growing with {brand.productName}</p>
         <Link to="/get-started" className="gs-primary-cta gs-large">
           Get Started - First $50 Free
         </Link>

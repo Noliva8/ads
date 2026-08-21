@@ -1,10 +1,11 @@
 import React from 'react';
 import { Box, Typography, styled } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { brand } from '../../brand';
 
 const FooterContainer = styled('footer')({
   backgroundColor: 'var(--bg-primary)',
-  color: 'var(--primary-font-color)',
+  color: 'var(--brand-text-primary)',
   padding: '24px 0',
   marginTop: 'auto',
 });
@@ -29,7 +30,7 @@ const Footer = () => {
         <FooterLink to="/contact">Contact</FooterLink>
       </Box>
       <Typography variant="body2" align="center" color="var(--p-color)">
-        © {new Date().getFullYear()} AfroFeel Ads. All rights reserved.
+        © {new Date().getFullYear()} {brand.productName}. All rights reserved.
       </Typography>
     </FooterContainer>
   );

@@ -4,6 +4,7 @@ import { Box, Typography, Button } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { tokens } from "../../../theme";
 import { useTheme } from "@mui/material/styles";
+import { brand, brandOutlinedButtonSx, brandPrimaryButtonSx } from "../../../brand";
 
 function AdPymentSuccess() {
   const theme = useTheme();
@@ -36,7 +37,7 @@ function AdPymentSuccess() {
         height: '100%',
         textAlign: 'center',
         p: 4,
-        backgroundColor: colors.blackNeutral[700]
+        backgroundColor: brand.colors.background
       }}
     >
       <CheckCircleIcon sx={{ fontSize: 80, color: colors.greenAccent[500], mb: 3 }} />
@@ -56,7 +57,7 @@ function AdPymentSuccess() {
           target="_blank"
           rel="noopener noreferrer"
           variant="contained"
-          sx={{ mb: 3, backgroundColor: colors.orange[500], '&:hover': { backgroundColor: colors.orange[600] } }}
+          sx={{ ...brandPrimaryButtonSx, mb: 3 }}
         >
           View Receipt
         </Button>
@@ -66,9 +67,7 @@ function AdPymentSuccess() {
         onClick={handleNavigateToUpload}
         variant="outlined"
         sx={{
-          color: colors.graySoft[100],
-          borderColor: colors.orange[500],
-          '&:hover': { borderColor: colors.orange[600] }
+          ...brandOutlinedButtonSx,
         }}
       >
         Continue to Upload Advert

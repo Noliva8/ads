@@ -31,6 +31,7 @@ import {
 } from "@mui/icons-material";
 import { MY_ADS } from "../../../../utils/query";
 import { tokens } from "../../../../theme";
+import { brand, brandPrimaryButtonSx } from "../../../../brand";
 
 
 
@@ -133,8 +134,8 @@ export default function AdDisplay({
           variant="rounded"
           sx={{
             width: 56, height: 56,
-            bgcolor: colors.blackNeutral[400],
-            border: `1px solid ${colors.blackNeutral[500]}`,
+            bgcolor: brand.colors.cardSurface,
+            border: `1px solid ${brand.colors.cardBorder}`,
             cursor: "pointer",
           }}
           onClick={() => handlePreview(params.row)}
@@ -177,25 +178,25 @@ export default function AdDisplay({
       bgcolor: "transparent",
       color: colors.graySoft[100],
       fontWeight: 800,
-      borderBottom: `1px solid ${colors.blackNeutral[500]}`,
+      borderBottom: `1px solid ${brand.colors.cardBorder}`,
     },
     [`& .${gridClasses.cell}`]: {
       color: colors.graySoft[100],
-      borderBottom: `1px solid ${colors.blackNeutral[500]}`,
+      borderBottom: `1px solid ${brand.colors.cardBorder}`,
       py: 1.25,
       fontSize: "0.98rem",
     },
     "& .MuiDataGrid-footerContainer": {
       bgcolor: "transparent",
       color: colors.graySoft[200],
-      borderTop: `1px solid ${colors.blackNeutral[500]}`,
+      borderTop: `1px solid ${brand.colors.cardBorder}`,
     },
     "& .MuiDataGrid-toolbarContainer": {
       p: 1,
       bgcolor: "transparent",
     },
     [`& .${gridClasses.row}:hover`]: {
-      backgroundColor: colors.blackNeutral[500],
+      backgroundColor: brand.colors.cardSurface,
     },
   };
 
@@ -233,12 +234,7 @@ export default function AdDisplay({
               <Button
                 variant="contained"
                 onClick={onCreateClick}
-                sx={{
-                  textTransform: "none",
-                  fontWeight: 700,
-                  bgcolor: colors.orange[500],
-                  "&:hover": { bgcolor: colors.orange[600] },
-                }}
+                sx={brandPrimaryButtonSx}
               >
                 Create First Ad
               </Button>

@@ -12,6 +12,7 @@ import {
   useTheme
 } from '@mui/material';
 import { tokens } from '../../../theme';
+import { brand, brandPanelSx } from '../../../brand';
 
 
 const BasicInfoStep = ({ data, setData, errors }) => {
@@ -61,11 +62,15 @@ const BasicInfoStep = ({ data, setData, errors }) => {
         style: { color: colors.graySoft[100] },
         sx: {
           '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: colors.graySoft[300]
+            borderColor: brand.colors.cardBorder
           },
           '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: colors.orange[500]
-          }
+            borderColor: brand.colors.accent
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: brand.colors.accent
+          },
+          ...brandPanelSx,
         }
       }}
       FormHelperTextProps={{
@@ -81,19 +86,20 @@ const BasicInfoStep = ({ data, setData, errors }) => {
       sx={{
         color: colors.graySoft[100],
         '& .MuiOutlinedInput-notchedOutline': {
-          borderColor: colors.graySoft[300]
+          borderColor: brand.colors.cardBorder
         },
         '&:hover .MuiOutlinedInput-notchedOutline': {
-          borderColor: colors.orange[500]
+          borderColor: brand.colors.accent
         },
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-          borderColor: colors.orange[500]
-        }
+          borderColor: brand.colors.accent
+        },
+        ...brandPanelSx,
       }}
       MenuProps={{
         PaperProps: {
           sx: {
-            backgroundColor: colors.blackNeutral[600],
+            backgroundColor: brand.colors.surface,
             color: colors.graySoft[100]
           }
         }

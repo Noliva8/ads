@@ -22,6 +22,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import WarningIcon from '@mui/icons-material/Warning';
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { tokens } from "../../../../theme";
+import { brand, brandCardSx, brandPanelSx, brandPrimaryButtonSx } from "../../../../brand";
 
 function Checkout({ clientSecret, onCancel, onPaymentSuccess, success, showCheckout, steps,  setSteps}) {
   const theme = useTheme();
@@ -118,7 +119,7 @@ function Checkout({ clientSecret, onCancel, onPaymentSuccess, success, showCheck
     
     const statusConfig = {
       processing: {
-        color: colors.orange[500],
+        color: brand.colors.accent,
         text: "Processing payment...",
         icon: <CircularProgress size={20} />
       },
@@ -133,7 +134,7 @@ function Checkout({ clientSecret, onCancel, onPaymentSuccess, success, showCheck
         icon: <ErrorIcon />
       },
       requires_action: {
-        color: colors.orange[500],
+        color: brand.colors.accent,
         text: "Additional action required",
         icon: <WarningIcon />
       }
@@ -157,7 +158,7 @@ function Checkout({ clientSecret, onCancel, onPaymentSuccess, success, showCheck
         fontSize: "16px",
         color: colors.graySoft[100],
         "::placeholder": { color: colors.graySoft[400] },
-        backgroundColor: colors.blackNeutral[500]
+        backgroundColor: brand.colors.cardSurface
       },
       invalid: { color: colors.redAccent[500] }
     },
@@ -167,10 +168,8 @@ function Checkout({ clientSecret, onCancel, onPaymentSuccess, success, showCheck
   return (
     <Card
       sx={{
-        backgroundColor: colors.blackNeutral[500],
-        p: 3,
+        ...brandCardSx,
         position: "relative",
-        border: `1px solid ${colors.blackNeutral[400]}`,
         mt: 3
       }}
     >
@@ -194,8 +193,9 @@ function Checkout({ clientSecret, onCancel, onPaymentSuccess, success, showCheck
               sx={{
                 "& .MuiInputLabel-root": { color: colors.graySoft[400] },
                 "& .MuiOutlinedInput-root": {
-                  backgroundColor: colors.blackNeutral[600],
-                  "& fieldset": { borderColor: colors.blackNeutral[400] }
+                  ...brandPanelSx,
+                  "& fieldset": { borderColor: brand.colors.cardBorder },
+                  "&.Mui-focused fieldset": { borderColor: brand.colors.accent },
                 }
               }}
             />
@@ -212,8 +212,9 @@ function Checkout({ clientSecret, onCancel, onPaymentSuccess, success, showCheck
               sx={{
                 "& .MuiInputLabel-root": { color: colors.graySoft[400] },
                 "& .MuiOutlinedInput-root": {
-                  backgroundColor: colors.blackNeutral[600],
-                  "& fieldset": { borderColor: colors.blackNeutral[400] }
+                  ...brandPanelSx,
+                  "& fieldset": { borderColor: brand.colors.cardBorder },
+                  "&.Mui-focused fieldset": { borderColor: brand.colors.accent },
                 }
               }}
             />
@@ -229,8 +230,9 @@ function Checkout({ clientSecret, onCancel, onPaymentSuccess, success, showCheck
                 onChange={(e) => setCountry(e.target.value)}
                 sx={{
                   "& .MuiOutlinedInput-root": {
-                    backgroundColor: colors.blackNeutral[600],
-                    "& fieldset": { borderColor: colors.blackNeutral[400] }
+                    ...brandPanelSx,
+                    "& fieldset": { borderColor: brand.colors.cardBorder },
+                    "&.Mui-focused fieldset": { borderColor: brand.colors.accent },
                   }
                 }}
               >
@@ -255,8 +257,9 @@ function Checkout({ clientSecret, onCancel, onPaymentSuccess, success, showCheck
                 sx={{
                   "& .MuiInputLabel-root": { color: colors.graySoft[400] },
                   "& .MuiOutlinedInput-root": {
-                    backgroundColor: colors.blackNeutral[600],
-                    "& fieldset": { borderColor: colors.blackNeutral[400] }
+                    ...brandPanelSx,
+                    "& fieldset": { borderColor: brand.colors.cardBorder },
+                    "&.Mui-focused fieldset": { borderColor: brand.colors.accent },
                   }
                 }}
               />
@@ -267,9 +270,7 @@ function Checkout({ clientSecret, onCancel, onPaymentSuccess, success, showCheck
             <Box
               sx={{
                 p: 2,
-                borderRadius: 1,
-                backgroundColor: colors.blackNeutral[600],
-                border: `1px solid ${colors.blackNeutral[400]}`
+                ...brandPanelSx,
               }}
             >
               <CardElement options={cardElementOptions} />
@@ -290,7 +291,7 @@ function Checkout({ clientSecret, onCancel, onPaymentSuccess, success, showCheck
               onClick={handleSubmit}
               variant="contained"
               disabled={isProcessing || !stripe}
-              sx={{ height: "50px", backgroundColor: colors.orange[500], "&:hover": { backgroundColor: colors.orange[600] } }}
+              sx={{ ...brandPrimaryButtonSx, height: "50px" }}
             >
               {isProcessing ? <CircularProgress size={24} color="inherit" /> : "Pay now"}
             </Button>

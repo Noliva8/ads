@@ -1,10 +1,10 @@
 /* ===== Color Variables ===== */
 :root {
-  --primary: #6E00FF;
-  --secondary: #FF00A8;
-  --accent: #E4C421;
-  --dark: #0F0F0F;
-  --light: #FFFFFF;
+  --primary: var(--brand-campaign-primary);
+  --secondary: var(--brand-campaign-secondary);
+  --accent: var(--brand-accent);
+  --dark: var(--brand-dark);
+  --light: var(--brand-light);
   --gray: #F5F5F7;
 }
 
@@ -13,7 +13,7 @@
   padding: 4rem 2rem;
   background: var(--dark);
   color: var(--light);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--brand-font-family);
 }
 
 .pricing-header {
@@ -46,18 +46,19 @@
 }
 
 .pricing-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  padding: 2rem;
+  background: var(--brand-card-bg);
+  border-radius: var(--brand-radius-lg);
+  padding: var(--brand-card-padding);
   transition: transform 0.3s, box-shadow 0.3s;
   position: relative;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--brand-card-border);
 }
 
 .pricing-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(110, 0, 255, 0.2);
+  background: var(--brand-card-bg-hover);
+  box-shadow: var(--brand-shadow-card-hover);
 }
 
 /* Card Header */
@@ -70,7 +71,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: rgba(110, 0, 255, 0.2);
+  background: var(--brand-card-icon-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,7 +113,7 @@
   background: var(--accent);
   color: var(--dark);
   padding: 0.3rem 1rem;
-  border-radius: 50px;
+  border-radius: var(--brand-radius-pill);
   font-size: 0.8rem;
   font-weight: 600;
 }
@@ -157,7 +158,7 @@
   width: 100%;
   padding: 1rem;
   border: none;
-  border-radius: 50px;
+  border-radius: var(--brand-radius-pill);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;

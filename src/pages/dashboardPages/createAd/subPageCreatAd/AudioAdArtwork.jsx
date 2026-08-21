@@ -18,6 +18,7 @@ import FileUpload from "@mui/icons-material/FileUpload";
 import { tokens } from "../../../../theme";
 import { AD_ARTWORK_UPLOAD } from "../../../../utils/mutation";
 import { useFormContext} from "react-hook-form";
+import { brand, brandCardSx, brandOutlinedButtonSx, brandPanelSx, brandPrimaryButtonSx } from "../../../../brand";
 
 
 const MAX_IMAGE_MB = 10; // 10 MB per your guidance
@@ -162,10 +163,8 @@ export default function AudioAdArtwork({ ad, onComplete, setSteps}) {
  <Box sx={{ width: "100%" }}>
   <Card
     sx={{
-      p: 3, width: "100%", minHeight: 560,
-      backgroundColor: colors.blackNeutral[600],
-      borderRadius: "12px",
-      boxShadow: "0 8px 16px rgba(0,0,0,0.1)",
+      ...brandCardSx,
+      width: "100%", minHeight: 560,
     }}
   >
     {isLoading ? (
@@ -175,7 +174,7 @@ export default function AudioAdArtwork({ ad, onComplete, setSteps}) {
           <CircularProgress 
             size={60} 
             thickness={4}
-            sx={{ color: colors.orangeAccent[400], mb: 3 }}
+            sx={{ color: brand.colors.accent, mb: 3 }}
           />
           <Typography 
             variant="h6" 
@@ -223,16 +222,16 @@ export default function AudioAdArtwork({ ad, onComplete, setSteps}) {
           onDrop={handleDrop}
           onClick={() => !isUploading && imageInputRef.current?.click()}
           sx={{
-            border: `2px dashed ${isDragging ? colors.orangeAccent[400] : colors.orangeAccent[200]}`,
-            borderRadius: "12px",
+            ...brandPanelSx,
+            border: `2px dashed ${isDragging ? brand.colors.accent : brand.colors.cardBorder}`,
             p: 4,
             mb: 2,
             textAlign: "center",
-            backgroundColor: isDragging ? "rgba(255,152,0,0.05)" : "transparent",
+            backgroundColor: isDragging ? brand.colors.accentSoft : "transparent",
             transition: "all 0.3s ease",
             cursor: isUploading ? "not-allowed" : "pointer",
             opacity: isUploading ? 0.7 : 1,
-            "&:hover": { borderColor: colors.orangeAccent[400] },
+            "&:hover": { borderColor: brand.colors.accent },
           }}
         >
           <input
@@ -248,7 +247,7 @@ export default function AudioAdArtwork({ ad, onComplete, setSteps}) {
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <CircularProgress 
                 size={48} 
-                sx={{ color: colors.orangeAccent[400], mb: 2 }} 
+                sx={{ color: brand.colors.accent, mb: 2 }} 
               />
               <Typography variant="h6" sx={{ color: colors.graySoft[100], mb: 1 }}>
                 Uploading...
@@ -259,7 +258,7 @@ export default function AudioAdArtwork({ ad, onComplete, setSteps}) {
             </Box>
           ) : (
             <>
-              <CloudUploadIcon sx={{ fontSize: 48, color: colors.orangeAccent[400], mb: 2 }} />
+              <CloudUploadIcon sx={{ fontSize: 48, color: brand.colors.accent, mb: 2 }} />
               <Typography variant="h6" sx={{ color: colors.graySoft[100], mb: 1 }}>
                 Drag & drop your artwork here
               </Typography>
@@ -272,7 +271,7 @@ export default function AudioAdArtwork({ ad, onComplete, setSteps}) {
                 disabled={isUploading}
                 onClick={(e) => { e.stopPropagation(); imageInputRef.current?.click(); }}
                 startIcon={<FileUpload />}
-                sx={{ backgroundColor: colors.orangeAccent[500], "&:hover": { backgroundColor: colors.orangeAccent[600] } }}
+                sx={brandPrimaryButtonSx}
               >
                 Select Image
               </Button>
@@ -281,18 +280,18 @@ export default function AudioAdArtwork({ ad, onComplete, setSteps}) {
         </Box>
 
         {error && (
-          <Alert severity="warning" sx={{ mt: 2, background: colors.blackNeutral[500], color: colors.graySoft[100] }}>
+          <Alert severity="warning" sx={{ mt: 2, background: brand.colors.cardSurface, color: colors.graySoft[100] }}>
             {error}
           </Alert>
         )}
         {warning && !error && (
-          <Alert severity="info" sx={{ mt: 2, background: colors.blackNeutral[500], color: colors.graySoft[100] }}>
+          <Alert severity="info" sx={{ mt: 2, background: brand.colors.cardSurface, color: colors.graySoft[100] }}>
             {warning}
           </Alert>
         )}
 
         {(file || useFallback) && (
-          <Box sx={{ mt: 3, p: 2, backgroundColor: colors.blackNeutral[500], borderRadius: "8px", position: "relative" }}>
+          <Box sx={{ ...brandPanelSx, mt: 3, p: 2, position: "relative" }}>
             {!useFallback && (
               <IconButton
                 onClick={handleRemove}
@@ -330,8 +329,8 @@ export default function AudioAdArtwork({ ad, onComplete, setSteps}) {
                   value={Math.max(progress, 15)}
                   sx={{
                     height: 6, borderRadius: 3, mt: 2,
-                    backgroundColor: colors.blackNeutral[400],
-                    "& .MuiLinearProgress-bar": { backgroundColor: colors.orangeAccent[400] },
+                    backgroundColor: brand.colors.cardBorder,
+                    "& .MuiLinearProgress-bar": { backgroundColor: brand.colors.accent },
                   }}
                 />
                 <Typography
@@ -350,16 +349,16 @@ export default function AudioAdArtwork({ ad, onComplete, setSteps}) {
             variant="text"
             onClick={handleUseFallback}
             disabled={useFallback || isUploading}
-            sx={{ color: colors.orangeAccent[400], "&:disabled": { color: colors.graySoft[500] } }}
+            sx={{ color: brand.colors.accent, "&:disabled": { color: colors.graySoft[500] } }}
           >
             {useFallback ? "Using Default Artwork" : "Use Default Artwork Instead"}
           </Button>
         </Box>
 
-        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mt: 4, pt: 2, borderTop: `1px solid ${colors.blackNeutral[400]}` }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mt: 4, pt: 2, borderTop: `1px solid ${brand.colors.cardBorder}` }}>
           <Button
             startIcon={<HelpCenterIcon />}
-            sx={{ color: colors.graySoft[300], "&:hover": { color: colors.orangeAccent[400] } }}
+            sx={{ color: colors.graySoft[300], "&:hover": { color: brand.colors.accent } }}
             onClick={() => window.open("/help/ads/artwork", "_blank")}
           >
             Help Center
@@ -369,7 +368,7 @@ export default function AudioAdArtwork({ ad, onComplete, setSteps}) {
               variant="outlined"
               onClick={handleRemove}
               disabled={isUploading}
-              sx={{ color: colors.graySoft[100], borderColor: colors.graySoft[500], "&:hover": { borderColor: colors.graySoft[400] } }}
+              sx={brandOutlinedButtonSx}
             >
               Cancel
             </Button>
@@ -379,8 +378,7 @@ export default function AudioAdArtwork({ ad, onComplete, setSteps}) {
               disabled={isUploading || (!file && !useFallback)}
               startIcon={isUploading ? <CircularProgress size={16} sx={{ color: 'inherit' }} /> : null}
               sx={{
-                backgroundColor: colors.orangeAccent[500],
-                "&:hover": { backgroundColor: colors.orangeAccent[600] },
+                ...brandPrimaryButtonSx,
                 "&:disabled": { backgroundColor: colors.graySoft[700], color: colors.graySoft[500] },
                 minWidth: 140
               }}
@@ -391,9 +389,9 @@ export default function AudioAdArtwork({ ad, onComplete, setSteps}) {
         </Box>
 
         <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 3 }}>
-          <Chip label="JPG • PNG • WEBP" variant="outlined" sx={{ color: colors.graySoft[300], borderColor: colors.graySoft[700] }} />
-          <Chip label={`Max ${MAX_IMAGE_MB}MB`} variant="outlined" sx={{ color: colors.graySoft[300], borderColor: colors.graySoft[700] }} />
-          <Chip label="Square 1200×1200 (1:1)" variant="outlined" sx={{ color: colors.graySoft[300], borderColor: colors.graySoft[700] }} />
+          <Chip label="JPG • PNG • WEBP" variant="outlined" sx={{ color: colors.graySoft[300], borderColor: brand.colors.cardBorder }} />
+          <Chip label={`Max ${MAX_IMAGE_MB}MB`} variant="outlined" sx={{ color: colors.graySoft[300], borderColor: brand.colors.cardBorder }} />
+          <Chip label="Square 1200×1200 (1:1)" variant="outlined" sx={{ color: colors.graySoft[300], borderColor: brand.colors.cardBorder }} />
         </Box>
       </CardContent>
     )}
@@ -426,9 +424,10 @@ const SuccessAdModal = ({ open, onClose, handleCreateNewAD }) => {
     transform: 'translate(-50%, -50%)',
     width: 500,
     maxWidth: '90vw',
-    bgcolor: colors.blackNeutral[600],
-    borderRadius: '12px',
-    boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+    bgcolor: brand.colors.cardSurface,
+    borderRadius: brand.radius.lg,
+    boxShadow: brand.shadow.lg,
+    border: `1px solid ${brand.colors.cardBorder}`,
     p: 0,
     outline: 'none'
   };
@@ -447,7 +446,7 @@ const SuccessAdModal = ({ open, onClose, handleCreateNewAD }) => {
         {/* Header */}
         <Box sx={{ 
           p: 3, 
-          borderBottom: `1px solid ${colors.blackNeutral[400]}`,
+          borderBottom: `1px solid ${brand.colors.cardBorder}`,
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center'
@@ -493,9 +492,8 @@ const SuccessAdModal = ({ open, onClose, handleCreateNewAD }) => {
           <Box sx={{ 
             mt: 3, 
             p: 2, 
-            backgroundColor: colors.blackNeutral[500],
-            borderRadius: '8px',
-            borderLeft: `4px solid ${colors.orangeAccent[500]}`
+            ...brandPanelSx,
+            borderLeft: `4px solid ${brand.colors.accent}`
           }}>
             <Typography sx={{ color: colors.graySoft[200], fontWeight: 500 }}>
               📧 What's Next?
@@ -524,7 +522,7 @@ const SuccessAdModal = ({ open, onClose, handleCreateNewAD }) => {
         {/* Actions */}
         <Box sx={{ 
           p: 3, 
-          borderTop: `1px solid ${colors.blackNeutral[400]}`,
+          borderTop: `1px solid ${brand.colors.cardBorder}`,
           display: 'flex', 
           justifyContent: 'flex-end',
           gap: 2
@@ -535,12 +533,7 @@ const SuccessAdModal = ({ open, onClose, handleCreateNewAD }) => {
             variant="outlined"
             onClick={onClose}
             sx={{
-              color: colors.graySoft[300],
-              borderColor: colors.graySoft[600],
-              '&:hover': {
-                borderColor: colors.graySoft[400],
-                backgroundColor: colors.blackNeutral[500]
-              }
+              ...brandOutlinedButtonSx,
             }}
           >
             View My Ads
@@ -550,10 +543,7 @@ const SuccessAdModal = ({ open, onClose, handleCreateNewAD }) => {
             variant="contained"
             onClick={handleCreateNewAD}
             sx={{
-              backgroundColor: colors.orangeAccent[500],
-              '&:hover': {
-                backgroundColor: colors.orangeAccent[600]
-              }
+              ...brandPrimaryButtonSx,
             }}
           >
             Create Another Ad
@@ -563,5 +553,3 @@ const SuccessAdModal = ({ open, onClose, handleCreateNewAD }) => {
     </Modal>
   );
 };
-
-

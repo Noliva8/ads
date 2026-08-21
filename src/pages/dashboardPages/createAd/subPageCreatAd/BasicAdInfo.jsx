@@ -21,6 +21,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { useFormContext, Controller } from "react-hook-form";
 import { tokens } from "../../../../theme";
+import { brand, brandCardSx, brandPanelSx, brandPrimaryButtonSx } from "../../../../brand";
 
 // Predefined country and city data
 const SUPPORTED_COUNTRIES = {
@@ -94,11 +95,11 @@ export default function BasicAdInfo({ colors }) {
     "& .MuiInputLabel-root": { color: _colors.graySoft[400] },
     "& .MuiInputLabel-root.Mui-focused": { color: _colors.graySoft[300] },
     "& .MuiOutlinedInput-root": {
-      backgroundColor: _colors.blackNeutral[500],
+      ...brandPanelSx,
       borderRadius: 1,
-      "& fieldset": { borderColor: _colors.blackNeutral[400] },
+      "& fieldset": { borderColor: brand.colors.cardBorder },
       "&:hover fieldset": { borderColor: _colors.graySoft[400] },
-      "&.Mui-focused fieldset": { borderColor: _colors.orange[500] },
+      "&.Mui-focused fieldset": { borderColor: brand.colors.accent },
     },
     "& .MuiInputBase-input": {
       color: _colors.graySoft[100],
@@ -107,9 +108,9 @@ export default function BasicAdInfo({ colors }) {
   };
 
   const menuPaperSx = {
-    bgcolor: _colors.blackNeutral[600],
+    bgcolor: brand.colors.surface,
     color: _colors.graySoft[100],
-    border: `1px solid ${_colors.blackNeutral[500]}`,
+    border: `1px solid ${brand.colors.cardBorder}`,
   };
 
   useEffect(() => {
@@ -136,11 +137,11 @@ export default function BasicAdInfo({ colors }) {
       
       <Card
         sx={{
+          ...brandCardSx,
           width: '100%',
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          backgroundColor: _colors.blackNeutral[600],
         }}
       >
 
@@ -279,7 +280,7 @@ export default function BasicAdInfo({ colors }) {
                             <Checkbox
                               checked={!!field.value}
                               onChange={(e) => field.onChange(e.target.checked)}
-                              sx={{ color: _colors.orange[500] }}
+                              sx={{ color: brand.colors.accent }}
                             />
                           }
                           label="Run in whole country"
@@ -437,10 +438,7 @@ export default function BasicAdInfo({ colors }) {
                 <Button
                   type="submit"
                   variant="contained"
-                  sx={{
-                    backgroundColor: _colors.orange[500],
-                    "&:hover": { backgroundColor: _colors.orange[600] },
-                  }}
+                  sx={brandPrimaryButtonSx}
                 >
                   Calculate Price
                 </Button>

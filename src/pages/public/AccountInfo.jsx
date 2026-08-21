@@ -29,19 +29,28 @@ import {
   LocationOn
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { brand } from '../../brand';
 
 const AccountCard = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),
-  borderRadius: '12px',
-  boxShadow: theme.shadows[3],
+  borderRadius: brand.radius.lg,
+  boxShadow: 'none',
   marginBottom: theme.spacing(4),
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A1A1A' : '#FFFFFF',
+  background: brand.colors.cardSurface,
+  backdropFilter: 'blur(10px)',
+  border: `1px solid ${brand.colors.cardBorder}`,
+  transition: 'transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease',
+  '&:hover': {
+    transform: 'translateY(-10px)',
+    background: brand.colors.cardSurfaceHover,
+    boxShadow: brand.shadow.cardHover,
+  },
 }));
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   marginBottom: theme.spacing(3),
-  color: theme.palette.mode === 'dark' ? '#E4C421' : '#1a5d5d',
+  color: brand.colors.accent,
   display: 'flex',
   alignItems: 'center',
   gap: theme.spacing(1)
@@ -112,7 +121,7 @@ const AccountInfo = () => {
           gutterBottom 
           sx={{ 
             fontWeight: 700,
-            color: theme.palette.mode === 'dark' ? '#E4C421' : '#441a49'
+            color: brand.colors.accent
           }}
         >
           Account Information
@@ -141,9 +150,9 @@ const AccountInfo = () => {
               onClick={() => setEditMode(prev => ({ ...prev, profile: true }))}
               sx={{
                 textTransform: 'none',
-                borderRadius: '50px',
-                borderColor: theme.palette.mode === 'dark' ? '#E4C421' : '#1a5d5d',
-                color: theme.palette.mode === 'dark' ? '#E4C421' : '#1a5d5d'
+                borderRadius: brand.radius.pill,
+                borderColor: brand.colors.accent,
+                color: brand.colors.accent
               }}
             >
               Edit Profile
@@ -155,7 +164,7 @@ const AccountInfo = () => {
                 onClick={() => setEditMode(prev => ({ ...prev, profile: false }))}
                 sx={{
                   textTransform: 'none',
-                  borderRadius: '50px'
+                  borderRadius: brand.radius.pill
                 }}
               >
                 Cancel
@@ -165,8 +174,9 @@ const AccountInfo = () => {
                 onClick={() => handleSave('profile')}
                 sx={{
                   textTransform: 'none',
-                  borderRadius: '50px',
-                  background: `linear-gradient(135deg, ${theme.palette.secondary.main} 0%, ${theme.palette.primary.main} 100%)`
+                  borderRadius: brand.radius.pill,
+                  background: brand.gradients.accent,
+                  color: brand.colors.dark
                 }}
               >
                 Save Changes
@@ -182,7 +192,7 @@ const AccountInfo = () => {
                 width: 120, 
                 height: 120, 
                 mb: 2,
-                border: `3px solid ${theme.palette.mode === 'dark' ? '#E4C421' : '#1a5d5d'}`
+                border: `3px solid ${brand.colors.accent}`
               }}
               src="/path-to-avatar.jpg"
             />
@@ -297,9 +307,9 @@ const AccountInfo = () => {
               onClick={() => setEditMode(prev => ({ ...prev, security: true }))}
               sx={{
                 textTransform: 'none',
-                borderRadius: '50px',
-                borderColor: theme.palette.mode === 'dark' ? '#E4C421' : '#1a5d5d',
-                color: theme.palette.mode === 'dark' ? '#E4C421' : '#1a5d5d'
+                borderRadius: brand.radius.pill,
+                borderColor: brand.colors.accent,
+                color: brand.colors.accent
               }}
             >
               Change Password
@@ -311,7 +321,7 @@ const AccountInfo = () => {
                 onClick={() => setEditMode(prev => ({ ...prev, security: false }))}
                 sx={{
                   textTransform: 'none',
-                  borderRadius: '50px'
+                  borderRadius: brand.radius.pill
                 }}
               >
                 Cancel
@@ -321,8 +331,9 @@ const AccountInfo = () => {
                 onClick={() => handleSave('security')}
                 sx={{
                   textTransform: 'none',
-                  borderRadius: '50px',
-                  background: `linear-gradient(135deg, ${theme.palette.secondary.main} 0%, ${theme.palette.primary.main} 100%)`
+                  borderRadius: brand.radius.pill,
+                  background: brand.gradients.accent,
+                  color: brand.colors.dark
                 }}
               >
                 Update Password
@@ -410,8 +421,8 @@ const AccountInfo = () => {
             <Grid item xs={12}>
               <Box sx={{ 
                 p: 2,
-                borderRadius: '8px',
-                backgroundColor: theme.palette.mode === 'dark' ? 'rgba(26, 93, 93, 0.2)' : 'rgba(26, 93, 93, 0.1)'
+                borderRadius: brand.radius.md,
+                backgroundColor: brand.colors.accentSoft
               }}>
                 <Typography variant="body2" sx={{ mb: 1, fontWeight: 600 }}>
                   Password Requirements:
@@ -458,7 +469,7 @@ const AccountInfo = () => {
               color="error"
               sx={{
                 textTransform: 'none',
-                borderRadius: '8px',
+                borderRadius: brand.radius.md,
                 py: 1.5
               }}
             >
@@ -471,7 +482,7 @@ const AccountInfo = () => {
               variant="outlined"
               sx={{
                 textTransform: 'none',
-                borderRadius: '8px',
+                borderRadius: brand.radius.md,
                 py: 1.5,
                 borderColor: theme.palette.mode === 'dark' ? '#B25035' : '#B25035',
                 color: theme.palette.mode === 'dark' ? '#B25035' : '#B25035'
@@ -487,7 +498,7 @@ const AccountInfo = () => {
               color="error"
               sx={{
                 textTransform: 'none',
-                borderRadius: '8px',
+                borderRadius: brand.radius.md,
                 py: 1.5
               }}
             >

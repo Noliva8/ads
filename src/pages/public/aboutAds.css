@@ -3,7 +3,8 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 2rem;
-  color: #ffffff;
+  color: var(--brand-light);
+  font-family: var(--brand-font-family);
 }
 
 .af-hero {
@@ -17,7 +18,7 @@
 }
 
 .af-hero h1 span {
-  color: #E4C421;
+  color: var(--brand-accent);
 }
 
 .af-hero p {
@@ -35,17 +36,18 @@
 }
 
 .af-format-card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 2rem;
-  transition: transform 0.3s ease;
+  background: var(--brand-card-bg);
+  border-radius: var(--brand-radius-lg);
+  padding: var(--brand-card-padding);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--brand-card-border);
 }
 
 .af-format-card:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-10px);
+  background: var(--brand-card-bg-hover);
+  box-shadow: var(--brand-shadow-card-hover);
 }
 
 .af-format-header {
@@ -70,7 +72,7 @@
 .af-best-for h3 {
   font-size: 1.25rem;
   margin: 1.5rem 0 1rem;
-  color: #E4C421;
+  color: var(--brand-accent);
 }
 
 .af-specs ul,
@@ -94,22 +96,22 @@
   content: "✓";
   position: absolute;
   left: 0;
-  color: #E4C421;
+  color: var(--brand-accent);
 }
 
 .af-insight p {
-  background: rgba(228, 196, 33, 0.1);
+  background: var(--brand-accent-soft);
   padding: 1rem;
-  border-radius: 8px;
-  border-left: 3px solid #E4C421;
+  border-radius: var(--brand-radius-md);
+  border-left: 3px solid var(--brand-accent);
 }
 
 .af-cta-example {
   margin: 1.5rem 0;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  font-family: monospace;
+  background: var(--brand-card-bg);
+  border-radius: var(--brand-radius-md);
+  font-family: var(--brand-font-mono);
 }
 
 .af-best-for {
@@ -123,10 +125,10 @@
 }
 
 .af-tag {
-  background: rgba(228, 196, 33, 0.15);
-  color: #E4C421;
+  background: var(--brand-accent-soft);
+  color: var(--brand-accent);
   padding: 0.5rem 1rem;
-  border-radius: 50px;
+  border-radius: var(--brand-radius-pill);
   font-size: 0.85rem;
 }
 

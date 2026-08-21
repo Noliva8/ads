@@ -1,18 +1,18 @@
 /* index.css */
 :root {
   /* Color System */
-  --bg-primary: #121212; /* Deep dark for main bg */
-  --bg-secondary: #1e1e1e; /* Cards, sidebar */
-  --bg-tertiary: #252525; /* Hover states */
+  --bg-primary: var(--brand-bg-primary, #121212);
+  --bg-secondary: var(--brand-bg-secondary, #1e1e1e);
+  --bg-tertiary: var(--brand-bg-tertiary, #252525);
   --bg-overlay: rgba(0, 0, 0, 0.7); /* Modals/backdrops */
   
-  --primary-accent: #FF7D45; /* Primary CTA color (adjusted rust) */
-  --primary-accent-hover: #E56A36; 
-  --secondary-accent: #FFB45B; /* Gold for highlights */
+  --primary-accent: var(--brand-accent, #E4C421);
+  --primary-accent-hover: var(--brand-accent-hover, #F8D347); 
+  --secondary-accent: var(--brand-secondary, #1A5D5D);
   
-  --text-primary: rgba(255, 255, 255, 0.92);
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --text-disabled: rgba(255, 255, 255, 0.5);
+  --text-primary: var(--brand-text-primary, rgba(255, 255, 255, 0.92));
+  --text-secondary: var(--brand-text-secondary, rgba(255, 255, 255, 0.7));
+  --text-disabled: var(--brand-text-muted, rgba(255, 255, 255, 0.5));
   
   /* Status Colors */
   --success: #4CAF50;
@@ -21,13 +21,13 @@
   --info: #2196F3;
   
   /* Borders */
-  --border-light: rgba(255, 255, 255, 0.12);
-  --border-medium: rgba(255, 255, 255, 0.2);
+  --border-light: var(--brand-border, rgba(255, 255, 255, 0.12));
+  --border-medium: var(--brand-border-strong, rgba(255, 255, 255, 0.2));
   
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.32);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-sm: var(--brand-shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.24));
+  --shadow-md: var(--brand-shadow-md, 0 4px 12px rgba(0, 0, 0, 0.32));
+  --shadow-lg: var(--brand-shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.4));
   
   /* Spacing System */
   --space-unit: 8px;
@@ -38,10 +38,10 @@
   --space-xl: calc(var(--space-unit) * 4);
   
   /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'Roboto Mono', monospace;
-  --font-size-base: 14px;
-  --line-height-base: 1.5;
+  --font-family: var(--brand-font-family, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  --font-mono: var(--brand-font-mono, 'Roboto Mono', monospace);
+  --font-size-base: var(--brand-font-size-base, 14px);
+  --line-height-base: var(--brand-line-height-base, 1.5);
   
   /* Z-index */
   --z-sidebar: 100;
@@ -71,19 +71,20 @@ html, body, .main-content {
 
 
 body {
-  background-color: #242424;
-  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--brand-dark);
+  color: var(--text-primary);
+  font-family: var(--font-family);
 }
 
 /* Typography */
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--primary-accent);
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  color: var(--primary-accent-hover);
 }
 
 h1 {
@@ -119,6 +120,7 @@ button:focus-visible {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--brand-dark);
 }
 
 

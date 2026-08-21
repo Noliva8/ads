@@ -9,6 +9,8 @@ import Footer from './components/Layout/Footer';
 import Sidebar from './components/Layout/Sidebar';
 import LoadingSpinner from './components/ui/LoadingSpinner.jsx';
 import ToastNotifications from './components/ui/ToastNotifications.jsx';
+import VisitorTracker from './components/Analytics/VisitorTracker.jsx';
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,8 +20,9 @@ import AppBar from './pages/dashboardPages/global/AppBar.jsx';
 // auth
 import advertizerAuth from './utils/advertizerAuth.js';
 // theme
-import { CssBaseline,ThemeProvider } from "@mui/material";
+import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from './theme.js';
+import { brandCssVariables } from './brand.js';
 
 import SideBar from './pages/dashboardPages/global/SideBar.jsx';
 
@@ -73,6 +76,8 @@ const App = () => {
 
        <ThemeProvider theme={theme}>
        <CssBaseline />
+       <GlobalStyles styles={{ ':root': brandCssVariables }} />
+       <VisitorTracker />
        
          <ToastContainer
         position="top-right"

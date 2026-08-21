@@ -12,6 +12,7 @@ import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import FileUpload from "@mui/icons-material/FileUpload";
 import { tokens } from "../../../../theme";
 import { AUDIO_AD_UPLOAD } from "../../../../utils/mutation"; // uses mutation below
+import { brand, brandCardSx, brandOutlinedButtonSx, brandPanelSx, brandPrimaryButtonSx } from "../../../../brand";
 
 const MAX_AUDIO_MB = 10;
 const VALID_TYPES = new Set([
@@ -104,12 +105,9 @@ export default function AdAudioUpload({ ad, onComplete, setSteps}) {
     <Box sx={{ width: "100%" }}>
       <Card
         sx={{
-          p: 3,
+          ...brandCardSx,
           width: "100%",
           minHeight: 560,
-          backgroundColor: colors.blackNeutral[600],
-          borderRadius: "12px",
-          boxShadow: "0 8px 16px rgba(0,0,0,0.1)",
         }}
       >
         <CardContent>
@@ -127,16 +125,16 @@ export default function AdAudioUpload({ ad, onComplete, setSteps}) {
             onDrop={handleDrop}
             onClick={() => !isUploading && audioInputRef.current?.click()}
             sx={{
-              border: `2px dashed ${isDragging ? colors.orangeAccent[400] : colors.orangeAccent[200]}`,
-              borderRadius: "12px",
+              ...brandPanelSx,
+              border: `2px dashed ${isDragging ? brand.colors.accent : brand.colors.cardBorder}`,
               p: 4,
               mb: 2,
               textAlign: "center",
-              backgroundColor: isDragging ? "rgba(255,152,0,0.05)" : "transparent",
+              backgroundColor: isDragging ? brand.colors.accentSoft : "transparent",
               transition: "all 0.3s ease",
               cursor: isUploading ? "not-allowed" : "pointer",
               opacity: isUploading ? 0.7 : 1,
-              "&:hover": { borderColor: colors.orangeAccent[400] },
+              "&:hover": { borderColor: brand.colors.accent },
             }}
           >
             <input
@@ -148,7 +146,7 @@ export default function AdAudioUpload({ ad, onComplete, setSteps}) {
               disabled={isUploading}
             />
 
-            <CloudUploadIcon sx={{ fontSize: 48, color: colors.orangeAccent[400], mb: 2 }} />
+            <CloudUploadIcon sx={{ fontSize: 48, color: brand.colors.accent, mb: 2 }} />
             <Typography variant="h6" sx={{ color: colors.graySoft[100], mb: 1 }}>
               Drag and drop your audio here
             </Typography>
@@ -164,20 +162,20 @@ export default function AdAudioUpload({ ad, onComplete, setSteps}) {
                 audioInputRef.current?.click();
               }}
               startIcon={<FileUpload />}
-              sx={{ backgroundColor: colors.orangeAccent[500], "&:hover": { backgroundColor: colors.orangeAccent[600] } }}
+              sx={brandPrimaryButtonSx}
             >
               Select File
             </Button>
           </Box>
 
           {error && (
-            <Alert severity="warning" sx={{ mt: 2, background: colors.blackNeutral[500], color: colors.graySoft[100] }}>
+            <Alert severity="warning" sx={{ mt: 2, background: brand.colors.cardSurface, color: colors.graySoft[100] }}>
               {error}
             </Alert>
           )}
 
           {file && (
-            <Box sx={{ mt: 3, p: 2, backgroundColor: colors.blackNeutral[500], borderRadius: "8px", position: "relative" }}>
+            <Box sx={{ ...brandPanelSx, mt: 3, p: 2, position: "relative" }}>
               <IconButton
                 onClick={handleRemove}
                 disabled={isUploading}
@@ -187,7 +185,7 @@ export default function AdAudioUpload({ ad, onComplete, setSteps}) {
               </IconButton>
 
               <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-                <AudiotrackIcon sx={{ color: colors.orangeAccent[400], mr: 2, fontSize: 40 }} />
+                <AudiotrackIcon sx={{ color: brand.colors.accent, mr: 2, fontSize: 40 }} />
                 <Box>
                   <Typography variant="subtitle1" sx={{ color: colors.graySoft[100] }}>
                     {file.name}
@@ -204,8 +202,8 @@ export default function AdAudioUpload({ ad, onComplete, setSteps}) {
                 sx={{
                   height: 6,
                   borderRadius: 3,
-                  backgroundColor: colors.blackNeutral[400],
-                  "& .MuiLinearProgress-bar": { backgroundColor: colors.orangeAccent[400] },
+                  backgroundColor: brand.colors.cardBorder,
+                  "& .MuiLinearProgress-bar": { backgroundColor: brand.colors.accent },
                 }}
               />
               <Typography
@@ -217,10 +215,10 @@ export default function AdAudioUpload({ ad, onComplete, setSteps}) {
             </Box>
           )}
 
-          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mt: 4, pt: 2, borderTop: `1px solid ${colors.blackNeutral[400]}` }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mt: 4, pt: 2, borderTop: `1px solid ${brand.colors.cardBorder}` }}>
             <Button
               startIcon={<HelpCenterIcon />}
-              sx={{ color: colors.graySoft[300], "&:hover": { color: colors.orangeAccent[400] } }}
+              sx={{ color: colors.graySoft[300], "&:hover": { color: brand.colors.accent } }}
               onClick={() => window.open("/help/ads/audio", "_blank")}
             >
               Help Center
@@ -230,7 +228,7 @@ export default function AdAudioUpload({ ad, onComplete, setSteps}) {
                 variant="outlined"
                 onClick={handleRemove}
                 disabled={isUploading}
-                sx={{ color: colors.graySoft[100], borderColor: colors.graySoft[500], "&:hover": { borderColor: colors.graySoft[400] } }}
+                sx={brandOutlinedButtonSx}
               >
                 Cancel
               </Button>
@@ -239,8 +237,7 @@ export default function AdAudioUpload({ ad, onComplete, setSteps}) {
                 onClick={handleSubmit}
                 disabled={!file || isUploading}   
                 sx={{
-                  backgroundColor: colors.orangeAccent[500],
-                  "&:hover": { backgroundColor: colors.orangeAccent[600] },
+                  ...brandPrimaryButtonSx,
                   "&:disabled": { backgroundColor: colors.graySoft[700], color: colors.graySoft[500] },
                 }}
               >
