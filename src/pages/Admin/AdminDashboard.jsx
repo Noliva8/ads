@@ -1,7 +1,5 @@
+import OwnerDashboard from "../Owner/OwnerDashboard";
+
 export default function AdminDashboard() {
-    return(
-        <>
-        <h1>This is AdminDashboard for admins only </h1>
-        </>
-    )
+  return <OwnerDashboard />;
 }

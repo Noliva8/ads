@@ -45,8 +45,27 @@ const getRoleTheme = (isOwner, isSuperAdmin, isAdmin, colors) => {
   };
 };
 
-const getPermissionRoute = (permissionKey, sectionLabel, dashboardBase) => {
+const getPermissionRoute = (permissionKey, sectionLabel, dashboardBase, permissionLabel) => {
   const normalizedSection = sectionLabel?.toLowerCase() || "";
+  const normalizedPermission = `${permissionKey || ""} ${permissionLabel || ""}`.toLowerCase();
+
+  if (
+    normalizedPermission.includes("artist") &&
+    (normalizedPermission.includes("view") ||
+      normalizedPermission.includes("list") ||
+      normalizedPermission.includes("all"))
+  ) {
+    return `${dashboardBase}/all-artists`;
+  }
+
+  if (
+    normalizedPermission.includes("song") &&
+    (normalizedPermission.includes("view") ||
+      normalizedPermission.includes("list") ||
+      normalizedPermission.includes("all"))
+  ) {
+    return `${dashboardBase}/all-songs`;
+  }
 
   if (normalizedSection.includes("admin")) {
     return dashboardBase === "/owner" ? "/owner/manage-admins" : dashboardBase;
@@ -61,7 +80,9 @@ const getPermissionRoute = (permissionKey, sectionLabel, dashboardBase) => {
   }
 
   if (normalizedSection.includes("song") || normalizedSection.includes("artist")) {
-    return dashboardBase === "/owner" ? dashboardBase : `${dashboardBase}/manage-songs`;
+    return normalizedSection.includes("artist")
+      ? `${dashboardBase}/all-artists`
+      : `${dashboardBase}/all-songs`;
   }
 
   if (normalizedSection.includes("setting")) {
@@ -81,7 +102,9 @@ const getPermissionRoute = (permissionKey, sectionLabel, dashboardBase) => {
   }
 
   if (permissionKey?.includes("song") || permissionKey?.includes("artist")) {
-    return dashboardBase === "/owner" ? dashboardBase : `${dashboardBase}/manage-songs`;
+    return permissionKey.includes("artist")
+      ? `${dashboardBase}/all-artists`
+      : `${dashboardBase}/all-songs`;
   }
 
   if (permissionKey?.includes("advertiser")) {
@@ -135,6 +158,18 @@ const SidebarContainer = styled(Sidebar)(({ colors, roleTheme }) => ({
   flexShrink: 0,
   transition: 'all 0.3s ease',
   borderRight: `1px solid ${brand.colors.cardBorder}`,
+  background: brand.colors.dark,
+  color: brand.colors.textPrimary,
+  '.ps-sidebar-root': {
+    background: brand.colors.dark,
+  },
+  '.ps-menu-root': {
+    background: brand.colors.dark,
+    minHeight: 'calc(100dvh - 84px)',
+  },
+  '.ps-menuitem-root': {
+    background: brand.colors.dark,
+  },
   [`.${sidebarClasses.container}`]: {
     background: brand.colors.dark,
     borderRight: 'none',
@@ -350,6 +385,8 @@ export default function SideBar() {
       { label: 'Analytics', path: '/dashboard/analytics' },
       { label: 'Billing', path: '/dashboard/billing' },
       { label: 'Help Center', path: '/dashboard/help' },
+      { label: 'View Artist', path: `${dashboardBase}/all-artists` },
+      { label: 'View Songs', path: `${dashboardBase}/all-songs` },
     ].find((item) => activePath === item.path || (!item.exact && activePath.startsWith(item.path)));
 
     if (matchingItem) {
@@ -366,6 +403,8 @@ export default function SideBar() {
         height: '100dvh',
         maxHeight: '100dvh',
         overflow: 'hidden',
+        background: brand.colors.dark,
+        alignSelf: 'flex-start',
         transition: 'width 0.3s ease, flex-basis 0.3s ease, min-width 0.3s ease',
       }}
     >
@@ -378,6 +417,9 @@ export default function SideBar() {
         rootStyles={{
           width: collapsed ? `${SIDEBAR_COLLAPSED_WIDTH}px` : `${SIDEBAR_WIDTH}px`,
           minWidth: collapsed ? `${SIDEBAR_COLLAPSED_WIDTH}px` : `${SIDEBAR_WIDTH}px`,
+          height: '100dvh',
+          background: brand.colors.dark,
+          color: brand.colors.textPrimary,
           [`.${sidebarClasses.container}`]: {
             width: collapsed ? `${SIDEBAR_COLLAPSED_WIDTH}px` : `${SIDEBAR_WIDTH}px`,
             background: brand.colors.dark,
@@ -430,7 +472,14 @@ export default function SideBar() {
         </Box>
 
         <Menu
+          rootStyles={{
+            background: brand.colors.dark,
+            minHeight: 'calc(100dvh - 84px)',
+          }}
           menuItemStyles={{
+            root: {
+              backgroundColor: brand.colors.dark,
+            },
             button: {
               padding: collapsed ? '10px 12px' : '10px 14px',
               transition: 'all 0.3s ease',
@@ -580,7 +629,7 @@ export default function SideBar() {
                         <Item
                           key={permission.key}
                           title={permission.label}
-                          to={getPermissionRoute(permission.key, section.label, dashboardBase)}
+                          to={getPermissionRoute(permission.key, section.label, dashboardBase, permission.label)}
                           icon={getPermissionIcon(permission.key, section.label)}
                           selected={selected}
                           setSelected={setSelected}

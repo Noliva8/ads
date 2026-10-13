@@ -89,7 +89,6 @@ const Overview = () => {
       tooltip: "Sign-ups/purchases"
     },
   ];
-
   return (
     <Box p={3}>
       {/* Header */}

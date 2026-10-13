@@ -3,6 +3,8 @@ import { useQuery } from "@apollo/client";
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import { Alert, Card, CardContent, Skeleton, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { useLocation, useNavigate } from "react-router-dom";
+import PresenceStatsCards from "../../../components/PresenceStatsCards";
 import { brand, brandCardSx } from "../../../brand";
 import {
   ARTIST_DASHBOARD_STATS,
@@ -22,7 +24,7 @@ const formatNumber = (value) => {
 const formatPercentValue = (value) => {
   const numericValue = Number(value);
   if (!Number.isFinite(numericValue)) return 0;
-  return numericValue;
+  return Number(numericValue.toFixed(1));
 };
 
 const StatValue = ({ loading, value, subtitle }) => {
@@ -138,6 +140,16 @@ const WeeklyTrendNote = ({ loading, thisWeek, previousWeek, changePercent }) => 
 };
 
 export default function OwnerMetrics() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const dashboardBase = location.pathname.startsWith("/super-admin")
+    ? "/super-admin"
+    : location.pathname.startsWith("/admin")
+      ? "/admin"
+      : location.pathname.startsWith("/dashboard")
+        ? "/dashboard"
+        : "/owner";
+  
   const {
     data: artistData,
     loading: artistsLoading,
@@ -172,12 +184,14 @@ export default function OwnerMetrics() {
       value: formatNumber(artistData?.artistDashboardStats?.total),
       note: `+${formatNumber(artistData?.artistDashboardStats?.thisWeek)} this wk`,
       loading: artistsLoading,
+      path: `${dashboardBase}/all-artists`,
     },
     {
       title: "Songs",
       value: formatNumber(songsData?.songsDashboardStats?.total),
       note: `+${formatNumber(songsData?.songsDashboardStats?.thisWeek)} this wk`,
       loading: songsLoading,
+      path: `${dashboardBase}/all-songs`,
     },
     {
       title: "Users",
@@ -203,8 +217,22 @@ export default function OwnerMetrics() {
       ),
     },
   ];
-
   const error = artistsError || songsError || usersError || playsError;
+
+  const openMetric = (metric) => {
+    if (metric.path) {
+      navigate(metric.path);
+    }
+  };
+
+  const handleMetricKeyDown = (event, metric) => {
+    if (!metric.path) return;
+
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openMetric(metric);
+    }
+  };
 
   return (
     <>
@@ -216,7 +244,24 @@ export default function OwnerMetrics() {
       <Grid container spacing={3} sx={{ mb: 3 }}>
         {metrics.map((metric) => (
           <Grid key={metric.title} size={{ xs: 12, sm: 6, lg: 3 }}>
-            <Card sx={{ ...brandCardSx, height: "100%" }}>
+            <Card
+              onClick={() => openMetric(metric)}
+              onKeyDown={(event) => handleMetricKeyDown(event, metric)}
+              role={metric.path ? "button" : undefined}
+              tabIndex={metric.path ? 0 : undefined}
+              sx={{
+                ...brandCardSx,
+                height: "100%",
+                cursor: metric.path ? "pointer" : "default",
+                outline: "none",
+                "&:focus-visible": metric.path
+                  ? {
+                      borderColor: brand.colors.accent,
+                      boxShadow: `0 0 0 3px ${brand.colors.accentSoft}`,
+                    }
+                  : undefined,
+              }}
+            >
               <CardContent>
                 <Typography
                   variant="caption"
@@ -244,6 +289,7 @@ export default function OwnerMetrics() {
           </Grid>
         ))}
       </Grid>
+      <PresenceStatsCards />
     </>
   );
 }

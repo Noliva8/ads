@@ -67,7 +67,6 @@ const LazySupport = React.lazy(() => import("./pages/public/Support"));
 const LazyAdminDashboard = React.lazy(() => import("./pages/Admin/AdminDashboard"));
 const LazyAdminManage = React.lazy(() => import("./pages/Admin/SubAdminPages/AdminManage"));
 const LazyAdminSettings = React.lazy(() => import("./pages/Admin/SubAdminPages/AdminSettings"));
-const LazyAdminSongs = React.lazy(() => import("./pages/Admin/SubAdminPages/AdminSongs"));
 const LazyAdminMetadata = React.lazy(() => import("./pages/Admin/SubAdminPages/AdminMetadata"));
 const LazySuperAdminDashboard = React.lazy(() => import("./pages/SuperAdmin/SuperAdminDashboard"));
 const LazyOwnerDashboard = React.lazy(() => import("./pages/Owner/OwnerDashboard"));
@@ -75,6 +74,9 @@ const LazyOwnerManageAdmins = React.lazy(() => import("./pages/Owner/SubOwnerPag
 const LazyOwnerManageAdvertisers = React.lazy(() => import("./pages/Owner/SubOwnerPages/OwnerManageAdvertisers"));
 const LazyOwnerManageAds = React.lazy(() => import("./pages/Owner/SubOwnerPages/OwnerManageAds"));
 const LazyOwnerSettings = React.lazy(() => import("./pages/Owner/SubOwnerPages/OwnerSettings"));
+
+import AllArtistListPage from "./components/Commons/AllArtistList";
+import AllSongsListPage from "./components/Commons/AllSongsList";
 
 
 
@@ -182,8 +184,12 @@ const router = createBrowserRouter([
           { path: "billing", element: <Billing /> },
          
           { path: "CreateAudioAd", element: <CreateAd /> },
-          
+      
           { path: "upload/overlay", element: <OverlayAdUpload /> },
+          
+
+    { path: "all-artists", element: <AllArtistListPage /> },
+    { path: "all-songs", element: <AllSongsListPage /> },
 
 
           { path: "settings", element: <Settings /> },
@@ -257,12 +263,10 @@ const router = createBrowserRouter([
       },
       {
         path: "manage-songs",
-        element: (
-          <React.Suspense fallback={<div>Loading admin songs...</div>}>
-            <LazyAdminSongs />
-          </React.Suspense>
-        ),
+        element: <AllSongsListPage />,
       },
+      { path: "all-artists", element: <AllArtistListPage /> },
+      { path: "all-songs", element: <AllSongsListPage /> },
       {
         path: "metadata",
         element: (
@@ -309,12 +313,10 @@ const router = createBrowserRouter([
       },
       {
         path: "manage-songs",
-        element: (
-          <React.Suspense fallback={<div>Loading super admin songs...</div>}>
-            <LazyAdminSongs />
-          </React.Suspense>
-        ),
+        element: <AllSongsListPage />,
       },
+      { path: "all-artists", element: <AllArtistListPage /> },
+      { path: "all-songs", element: <AllSongsListPage /> },
       {
         path: "metadata",
         element: (
@@ -375,6 +377,8 @@ const router = createBrowserRouter([
           </React.Suspense>
         ),
       },
+      { path: "all-artists", element: <AllArtistListPage /> },
+      { path: "all-songs", element: <AllSongsListPage /> },
       {
         path: "settings",
         element: (

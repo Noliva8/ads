@@ -39,6 +39,14 @@ export default function AppBar() {
       flexWrap="wrap"
       p={2}
       data-user-role={userRole}
+      sx={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 20,
+        background: brand.colors.dark,
+        borderBottom: `1px solid ${brand.colors.cardBorder}`,
+        color: brand.colors.textPrimary,
+      }}
     >
       <Box display="flex" alignItems="center" gap={1.5} flexWrap="wrap" sx={{ minWidth: 0 }}>
         <Box
@@ -50,8 +58,19 @@ export default function AppBar() {
           px={1}
           sx={{ width: { xs: '100%', sm: 280 }, maxWidth: '100%' }}
         >
-          <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search…" />
-          <IconButton aria-label="search">
+          <InputBase
+            sx={{
+              ml: 1,
+              flex: 1,
+              color: brand.colors.textPrimary,
+              '& input::placeholder': {
+                color: brand.colors.textMuted,
+                opacity: 1,
+              },
+            }}
+            placeholder="Search…"
+          />
+          <IconButton aria-label="search" sx={{ color: brand.colors.textSecondary }}>
             <SearchOutlined />
           </IconButton>
         </Box>
@@ -76,16 +95,16 @@ export default function AppBar() {
 
       {/* Icon buttons */}
       <Box display="flex" alignItems="center" gap='2px' sx={{ ml: 'auto' }}>
-        <IconButton onClick={colorMode.toggleColorMode} aria-label="toggle theme">
+        <IconButton onClick={colorMode.toggleColorMode} aria-label="toggle theme" sx={{ color: brand.colors.textSecondary }}>
           {theme.palette.mode === 'dark' ? <DarkModeOutlined /> : <LightModeOutlined />}
         </IconButton>
-        <IconButton aria-label="notifications">
+        <IconButton aria-label="notifications" sx={{ color: brand.colors.textSecondary }}>
           <NotificationsOutlined />
         </IconButton>
-        <IconButton aria-label="settings">
+        <IconButton aria-label="settings" sx={{ color: brand.colors.textSecondary }}>
           <SettingsOutlined />
         </IconButton>
-        <IconButton aria-label="profile">
+        <IconButton aria-label="profile" sx={{ color: brand.colors.textSecondary }}>
           <PersonOutlined />
         </IconButton>
       </Box>

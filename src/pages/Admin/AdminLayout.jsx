@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import "../dashboardPages/dashboard/dashboard.css";
 import AppBar from "../../pages/dashboardPages/global/AppBar";
 import SideBar from "../../pages/dashboardPages/global/SideBar";
 

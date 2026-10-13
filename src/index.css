@@ -63,6 +63,7 @@ html, body, .main-content {
 
   min-height: 100vh;
   overflow-x: hidden;
+  background-color: var(--brand-dark);
 
   
 }
@@ -132,16 +133,16 @@ button:focus-visible {
 
 /* Track */
 ::-webkit-scrollbar-track{
-  background: #e0e0e0
+  background: var(--brand-dark);
 }
 
 /* Handle */
 
 ::-webkit-scrollbar-thumb{
-   background: #888;
+   background: var(--brand-border-strong);
 }
 
 /* Handle on havor */
 ::-webkit-scrollbar-track:hover{
-  background: #555
+  background: var(--brand-card-solid-bg);
 }

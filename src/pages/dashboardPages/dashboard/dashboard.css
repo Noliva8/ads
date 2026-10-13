@@ -1,11 +1,13 @@
 .dashboard-container{
     display: flex;
-    position: relative;
+    position: fixed;
+    inset: 0;
     width: 100%;
-    min-height: 100vh;
-    height: auto;
-    overflow: visible;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
     background: var(--brand-dark);
+    align-items: stretch;
 }
 
 .dashboard-main-content{
@@ -15,7 +17,8 @@
     min-width: 0;
     flex: 1 1 auto;
     min-height: 100vh;
-    height: auto;
+    height: 100vh;
+    height: 100dvh;
     overflow-y: auto;
     overflow-x: hidden;
     background: var(--brand-dark);
